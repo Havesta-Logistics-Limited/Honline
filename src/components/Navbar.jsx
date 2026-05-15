@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useContent, fetchContentJson } from '../hooks/useContent';
 
@@ -86,25 +86,27 @@ export default function Navbar() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-950 border-t border-white/[0.10] px-4 pb-4"
-          >
-            {c.navLinks.map((l) => (
-              <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-3 text-gray-400 hover:text-white text-sm border-b border-white/[0.04]">
-                {l.label}
-              </a>
-            ))}
-            <a href="#invest" onClick={() => setOpen(false)} className="block mt-4 text-center text-sm font-semibold text-black bg-emerald-400 px-5 py-2.5 rounded-lg">
-              {c.cta2Label}
+      {open && (
+        <div className="md:hidden bg-gray-950 border-t border-white/[0.10] px-4 pb-4">
+          {c.navLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block py-3 text-gray-400 hover:text-white text-sm border-b border-white/[0.04]"
+            >
+              {l.label}
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+          <a
+            href="#invest"
+            onClick={() => setOpen(false)}
+            className="block mt-4 text-center text-sm font-semibold text-black bg-emerald-400 px-5 py-2.5 rounded-lg"
+          >
+            {c.cta2Label}
+          </a>
+        </div>
+      )}
     </motion.nav>
   );
 }
