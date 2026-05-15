@@ -960,13 +960,37 @@ function EmailCapturesPanel() {
   );
 }
 
-// ─── Export / Import panel ────────────────────────────────────────────────────
+// ─── Export / Import / Push to Live panel ────────────────────────────────────
+const GITHUB_REPO = 'Havesta-Logistics-Limited/Honline';
+const GITHUB_FILE = 'public/content.json';
+const GITHUB_BRANCH = 'main';
+
 function ExportImportPanel() {
   const importRef = useRef(null);
   const [status, setStatus] = useState('');
   const [importing, setImporting] = useState(false);
+  const [pushing, setPushing] = useState(false);
+  const [token, setToken] = useState(() => localStorage.getItem('havesta_github_token') || '');
+  const [showToken, setShowToken] = useState(false);
 
-  const flash = (msg) => { setStatus(msg); setTimeout(() => setStatus(''), 3000); };
+  const flash = (msg, ok = true) => {
+    setStatus({ msg, ok });
+    setTimeout(() => setStatus(''), 5000);
+  };
+
+  const buildBundle = () => {
+    const bundle = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key === 'havesta_logo') {
+        bundle[key] = localStorage.getItem(key);
+      } else if (key.startsWith('havesta_content_')) {
+        try { bundle[key] = JSON.parse(localStorage.getItem(key)); }
+        catch { bundle[key] = localStorage.getItem(key); }
+      }
+    }
+    return bundle;
+  };
 
   const handleExport = () => {
     const bundle = {};
@@ -983,7 +1007,7 @@ function ExportImportPanel() {
     a.download = `havesta-content-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    flash('Export downloaded.');
+    flash('Export downloaded.', true);
   };
 
   const handleImport = (e) => {
@@ -997,15 +1021,15 @@ function ExportImportPanel() {
         let count = 0;
         for (const [key, value] of Object.entries(bundle)) {
           if (key.startsWith('havesta_content_') || key === 'havesta_logo') {
-            localStorage.setItem(key, value);
+            localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
             count++;
           }
         }
         window.dispatchEvent(new CustomEvent('havesta:logo'));
         window.dispatchEvent(new CustomEvent('havesta:content', { detail: { key: '__reload__' } }));
-        flash(`✓ Imported ${count} item${count !== 1 ? 's' : ''}. Refresh the live site to see changes.`);
+        flash(`✓ Imported ${count} item${count !== 1 ? 's' : ''}. Content updated.`, true);
       } catch {
-        flash('Import failed — invalid file.');
+        flash('Import failed — invalid file.', false);
       }
       setImporting(false);
       e.target.value = '';
@@ -1013,14 +1037,123 @@ function ExportImportPanel() {
     reader.readAsText(file);
   };
 
+  const saveToken = () => {
+    localStorage.setItem('havesta_github_token', token.trim());
+    flash('✓ Token saved.', true);
+  };
+
+  const handlePushToLive = async () => {
+    const t = (token || localStorage.getItem('havesta_github_token') || '').trim();
+    if (!t) { flash('Enter your GitHub Personal Access Token first.', false); return; }
+
+    setPushing(true);
+    try {
+      const bundle = buildBundle();
+      const jsonStr = JSON.stringify(bundle, null, 2);
+
+      // Base64-encode for GitHub API (handles UTF-8)
+      const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+      // Get current file SHA (required for updates)
+      const getRes = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`,
+        { headers: { Authorization: `Bearer ${t}`, Accept: 'application/vnd.github+json' } }
+      );
+      const current = getRes.ok ? await getRes.json() : null;
+
+      // Push updated content.json to GitHub
+      const putRes = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${t}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/vnd.github+json',
+          },
+          body: JSON.stringify({
+            message: 'Update site content from admin portal',
+            content: encoded,
+            branch: GITHUB_BRANCH,
+            ...(current?.sha ? { sha: current.sha } : {}),
+          }),
+        }
+      );
+
+      if (putRes.ok) {
+        flash('✓ Pushed! Havesta.online will update in ~30 seconds.', true);
+      } else {
+        const err = await putRes.json().catch(() => ({}));
+        flash(`Push failed: ${err.message || `HTTP ${putRes.status}`}`, false);
+      }
+    } catch (e) {
+      flash(`Push failed: ${e.message}`, false);
+    }
+    setPushing(false);
+  };
+
   return (
     <div className="space-y-5">
-      {/* Export */}
+      {/* Push to Live — primary action */}
+      <div className="bg-emerald-950/25 border border-emerald-500/25 rounded-xl p-5">
+        <h3 className="text-white font-semibold text-sm mb-1 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          Push to Live Site
+        </h3>
+        <p className="text-gray-500 text-xs mb-4">
+          Sends all your content edits and logo directly to GitHub — Netlify auto-deploys to havesta.online within ~30 seconds. One-click, no manual steps.
+        </p>
+
+        <div className="mb-3">
+          <label className="block text-[11px] text-gray-400 mb-1">GitHub Personal Access Token</label>
+          <div className="flex gap-2 items-center">
+            <input
+              type={showToken ? 'text' : 'password'}
+              value={token}
+              onChange={e => setToken(e.target.value)}
+              placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+              className="flex-1 bg-gray-900 border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-mono focus:outline-none focus:border-emerald-500/40 transition-colors"
+            />
+            <button onClick={() => setShowToken(v => !v)} className="text-gray-600 hover:text-gray-300 text-xs transition-colors shrink-0">
+              {showToken ? 'Hide' : 'Show'}
+            </button>
+            <button onClick={saveToken} className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] text-white text-xs font-medium px-3 py-2 rounded-lg transition-colors shrink-0">
+              Save
+            </button>
+          </div>
+          <p className="text-gray-700 text-[10px] mt-1.5 leading-relaxed">
+            Create at: github.com → Settings → Developer settings → Personal access tokens → Tokens (classic). Choose "repo" scope. Paste it above and click Save — only needs to be done once.
+          </p>
+        </div>
+
+        <button
+          onClick={handlePushToLive}
+          disabled={pushing || !token.trim()}
+          className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-black font-bold text-sm py-3 rounded-xl transition-all flex items-center justify-center gap-2"
+        >
+          {pushing ? (
+            <>
+              <span className="w-3 h-3 rounded-full border-2 border-black/30 border-t-black animate-spin" />
+              Pushing to havesta.online…
+            </>
+          ) : (
+            '→ Push All Content to Live Site'
+          )}
+        </button>
+      </div>
+
+      {status && (
+        <p className={`text-sm font-medium ${status.ok ? 'text-emerald-400' : 'text-red-400'}`}>
+          {status.msg}
+        </p>
+      )}
+
+      {/* Export (backup) */}
       <div className="bg-gray-900/60 border border-white/[0.07] rounded-xl p-5">
-        <h3 className="text-white font-semibold text-sm mb-1">Export Content</h3>
-        <p className="text-gray-500 text-xs mb-4">Downloads all your content edits and logo as a single JSON file. Use this to transfer your changes to the live site or another device.</p>
+        <h3 className="text-white font-semibold text-sm mb-1">Export Content (Backup)</h3>
+        <p className="text-gray-500 text-xs mb-4">Downloads all your content edits and logo as a JSON file — useful as a backup or to move between devices.</p>
         <button onClick={handleExport}
-          className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">
+          className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">
           ↓ Download Content Bundle
         </button>
       </div>
@@ -1028,24 +1161,12 @@ function ExportImportPanel() {
       {/* Import */}
       <div className="bg-gray-900/60 border border-white/[0.07] rounded-xl p-5">
         <h3 className="text-white font-semibold text-sm mb-1">Import Content</h3>
-        <p className="text-gray-500 text-xs mb-4">Upload a previously exported JSON file. This overwrites all current content edits and logo on this device with the imported values.</p>
+        <p className="text-gray-500 text-xs mb-4">Upload a previously exported JSON file to restore content on this device.</p>
         <button onClick={() => importRef.current?.click()} disabled={importing}
           className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors disabled:opacity-50">
           {importing ? 'Importing…' : '↑ Upload Content Bundle'}
         </button>
         <input ref={importRef} type="file" accept=".json,application/json" className="hidden" onChange={handleImport} />
-      </div>
-
-      {status && <p className={`text-sm ${status.startsWith('✓') || status.startsWith('Export') ? 'text-emerald-400' : 'text-red-400'}`}>{status}</p>}
-
-      <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
-        <p className="text-amber-400/80 text-xs leading-relaxed">
-          <strong className="text-amber-400">How to sync to your live site:</strong><br />
-          1. Export from this page on localhost<br />
-          2. Go to <span className="font-mono">havesta.online/admin</span> and log in<br />
-          3. Open Export / Import → Upload the downloaded file<br />
-          4. Refresh the live site — all edits and your logo will appear
-        </p>
       </div>
     </div>
   );
@@ -1309,7 +1430,7 @@ export default function AdminPortal() {
                 : active === '_accounts'
                 ? 'Create and manage admin accounts. Each account needs a username and password to log in.'
                 : active === '_export'
-                ? 'Export all your content edits and logo from this browser, then import them on any other device or the live site.'
+                ? 'Push all content edits and your logo directly to havesta.online in one click using the GitHub token you set below.'
                 : 'Edit content for this section. Click "Save Changes" — updates take effect instantly on the live site.'}
             </p>
           </div>

@@ -1,4 +1,5 @@
-import { useContent } from '../hooks/useContent';
+import { useState, useEffect } from 'react';
+import { useContent, fetchContentJson } from '../hooks/useContent';
 
 const DEFAULTS = {
   companyName: 'Havesta Logistics Limited',
@@ -44,7 +45,17 @@ export default function Footer() {
 }
 
 function LogoMark() {
-  const logo = localStorage.getItem('havesta_logo');
+  const [logo, setLogo] = useState(() => localStorage.getItem('havesta_logo'));
+  useEffect(() => {
+    if (!localStorage.getItem('havesta_logo')) {
+      fetchContentJson().then(json => {
+        if (json['havesta_logo']) setLogo(json['havesta_logo']);
+      });
+    }
+    const handler = () => setLogo(localStorage.getItem('havesta_logo') || '');
+    window.addEventListener('havesta:logo', handler);
+    return () => window.removeEventListener('havesta:logo', handler);
+  }, []);
   if (logo) return <img src={logo} alt="Logo" className="w-6 h-6 object-contain rounded-md" />;
   return null;
 }

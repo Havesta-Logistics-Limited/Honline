@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Mail, Lock } from 'lucide-react';
-import { useContent } from '../hooks/useContent';
+import { useContent, fetchContentJson } from '../hooks/useContent';
 
 const DEFAULTS = {
   siteLabel: 'Investor Portal · Confidential',
@@ -17,7 +17,12 @@ const DEFAULTS = {
 function LogoMark() {
   const [logo, setLogo] = useState(() => localStorage.getItem('havesta_logo'));
   useEffect(() => {
-    const refresh = () => setLogo(localStorage.getItem('havesta_logo'));
+    if (!localStorage.getItem('havesta_logo')) {
+      fetchContentJson().then(json => {
+        if (json['havesta_logo']) setLogo(json['havesta_logo']);
+      });
+    }
+    const refresh = () => setLogo(localStorage.getItem('havesta_logo') || '');
     window.addEventListener('havesta:logo', refresh);
     window.addEventListener('storage', refresh);
     return () => {

@@ -1,0 +1,260 @@
+{
+  "havesta_content_navbar": {
+    "brandName": "Havesta",
+    "cta1Label": "Investor Deck",
+    "cta2Label": "Contact Us",
+    "navLinks": [
+      { "label": "Problem", "href": "#problem" },
+      { "label": "Solution", "href": "#solution" },
+      { "label": "Market", "href": "#market" },
+      { "label": "Technology", "href": "#technology" },
+      { "label": "Team", "href": "#team" },
+      { "label": "Pitch Deck", "href": "#pitch-deck" },
+      { "label": "Invest", "href": "#invest" }
+    ]
+  },
+  "havesta_content_hero": {
+    "badge": "Seed Round Open · AgriTech Infrastructure · Nigeria & Africa",
+    "headlineLine1": "Building Africa's",
+    "headlineLine2": "Cold-Chain Powered",
+    "headlineLine3": "Food Infrastructure",
+    "subheadline": "Havesta is a technology-enabled food distribution platform connecting farmers to businesses and consumers through cold-chain logistics, smart warehousing, and digital marketplace infrastructure.",
+    "cta1Label": "Request Investor Deck",
+    "cta2Label": "Explore the Platform",
+    "trustPills": ["Cold-Chain Certified", "B2B + B2C Model", "Real-Time Tracking"],
+    "stats": [
+      { "value": "$1T+", "label": "Africa Food Market by 2030" },
+      { "value": "40%", "label": "Post-Harvest Loss Rate" },
+      { "value": "200M+", "label": "Smallholder Farmers" },
+      { "value": "6%", "label": "Cold-Chain Penetration" }
+    ]
+  },
+  "havesta_content_problem": {
+    "badge": "The Problem",
+    "headlineLine1": "Africa's Food System",
+    "headlineLine2": "Is Broken",
+    "subheadline": "Nigeria and Africa are sitting on the world's largest agricultural opportunity — yet food wastage, broken logistics, and absent cold-chain infrastructure are costing the continent billions every year.",
+    "bannerStat": "$9,000,000,000",
+    "bannerDesc": "lost in food wastage across Nigeria every single year",
+    "cards": [
+      { "stat": "40%", "title": "Post-Harvest Loss", "desc": "Nearly 40% of all harvested food in Nigeria is lost before reaching consumers — a $9 billion annual crisis." },
+      { "stat": "6%", "title": "Cold-Chain Penetration", "desc": "Only 6% of Nigeria's food supply chain is cold-chain enabled, leaving perishables vulnerable at every touchpoint." },
+      { "stat": "7+", "title": "Middlemen Layers", "desc": "Farmers receive as little as 20% of final retail price due to deeply fragmented and exploitative distribution chains." },
+      { "stat": "35%", "title": "Price Inflation", "desc": "Food inflation exceeds 35% annually in Nigeria — driven entirely by supply chain inefficiency, not supply scarcity." },
+      { "stat": "$9B", "title": "Annual Wastage Cost", "desc": "Nigeria loses over $9 billion in food value annually — one of the highest food wastage rates on the continent." },
+      { "stat": "200M+", "title": "Underserved Farmers", "desc": "Over 200 million smallholder farmers across Africa have no reliable market access, price visibility, or logistics support." }
+    ]
+  },
+  "havesta_content_solution": {
+    "badge": "The Solution",
+    "headlineLine1": "One Integrated",
+    "headlineLine2": "Food Infrastructure",
+    "subheadline": "Havesta integrates cold-chain logistics, digital commerce, and supply chain technology into a single operating system for food distribution across Africa.",
+    "pillars": [
+      { "title": "Cold-Chain Logistics", "badge": "Core Infrastructure", "desc": "Refrigerated transportation and last-mile delivery across Nigeria's key agricultural corridors, maintaining product integrity from farm gate to consumer." },
+      { "title": "Smart Warehousing", "badge": "Storage Layer", "desc": "Temperature-controlled storage facilities with IoT monitoring, inventory management, and real-time reporting for B2B clients and marketplaces." },
+      { "title": "Digital Marketplace", "badge": "Commerce Layer", "desc": "A dual-sided B2B and B2C marketplace connecting farmers, wholesalers, retailers, and consumers — with transparent pricing and quality guarantees." },
+      { "title": "Supply Chain Intelligence", "badge": "Intelligence Layer", "desc": "Data-driven demand forecasting, route optimization, and supply-demand matching tools that reduce waste and improve margins across the network." },
+      { "title": "Last-Mile Delivery", "badge": "Fulfillment Layer", "desc": "Hyper-local fulfillment networks for B2C grocery delivery and B2B food supply — with same-day and scheduled delivery windows across urban hubs." },
+      { "title": "IoT Monitoring", "badge": "Tech Layer", "desc": "Real-time temperature, humidity, and geolocation sensors embedded throughout the cold-chain ensuring product quality at every step." }
+    ]
+  },
+  "havesta_content_howItWorks": {
+    "badge": "How It Works",
+    "headlineLine1": "From Farm Gate",
+    "headlineLine2": "To Final Mile",
+    "subheadline": "A seamless, technology-orchestrated flow that eliminates waste and inefficiency at every step.",
+    "summaryText": "Havesta acts as the operating layer between agricultural supply and food demand — combining physical cold-chain infrastructure with a software-driven marketplace to create Africa's most efficient food distribution network.",
+    "steps": [
+      { "step": "01", "title": "Farmer Onboarding", "desc": "Farmers register on the Havesta platform via mobile or agent-assisted onboarding, list their produce, set pricing, and connect to our fulfilment network." },
+      { "step": "02", "title": "Havesta Infrastructure", "desc": "Our logistics engine coordinates cold-chain pickup, warehousing, quality grading, smart packaging, and inventory management across regional hubs." },
+      { "step": "03", "title": "B2B Order Fulfilment", "desc": "Restaurants, supermarkets, hotels, and FMCG brands place bulk orders via our B2B portal. Havesta fulfils via temperature-controlled fleet delivery." },
+      { "step": "04", "title": "B2C Consumer Delivery", "desc": "Urban households and individuals order fresh groceries via the Havesta app and receive same-day or next-day delivery from verified cold-chain stock." }
+    ]
+  },
+  "havesta_content_market": {
+    "badge": "Market Opportunity",
+    "headlineLine1": "A Trillion-Dollar",
+    "headlineLine2": "Structural Gap",
+    "subheadline": "Africa's food market is one of the world's fastest-growing. Havesta is entering at the inflection point — where digital infrastructure meets physical supply chain.",
+    "markets": [
+      { "label": "TAM", "sublabel": "Total Addressable Market", "value": "$1T+", "desc": "Africa's total food market by 2030, driven by population growth, urbanization, and rising middle-class consumption." },
+      { "label": "SAM", "sublabel": "Serviceable Addressable Market", "value": "$150B", "desc": "Nigeria's food retail and distribution market — one of Africa's largest, with ~220M consumers and $50B+ grocery spend annually." },
+      { "label": "SOM", "sublabel": "Serviceable Obtainable Market", "value": "$2.4B", "desc": "Target cold-chain and digital food distribution segment across Lagos, Abuja, and Kano — Havesta's initial operational zones." }
+    ],
+    "tailwinds": [
+      { "stat": "6.5%", "label": "Nigeria GDP growth driven by agriculture" },
+      { "stat": "53%", "label": "Urban population by 2035" },
+      { "stat": "3×", "label": "Online grocery growth forecast" },
+      { "stat": "$4.8B", "label": "African cold-chain market by 2027" }
+    ]
+  },
+  "havesta_content_businessModel": {
+    "badge": "Business Model",
+    "headlineLine1": "Multiple Diversified",
+    "headlineLine2": "Revenue Streams",
+    "subheadline": "Havesta captures value across the supply chain — from logistics to storage to marketplace commerce — creating a resilient, multi-revenue infrastructure business.",
+    "streams": [
+      { "title": "Delivery Revenue", "model": "Per-order", "margin": "35–45%", "desc": "Revenue generated from B2B and B2C delivery of perishables and grocery items via our cold-chain fleet." },
+      { "title": "Storage & Warehousing", "model": "Monthly SLA", "margin": "50–60%", "desc": "Recurring revenue from cold-storage rental contracts with FMCG brands, food processors, and agricultural cooperatives." },
+      { "title": "Marketplace Commission", "model": "5–15% GMV take-rate", "margin": "75–85%", "desc": "Commission earned on every transaction facilitated through the Havesta B2B procurement and B2C grocery marketplace." },
+      { "title": "B2B Contracts", "model": "Retainer + volume", "margin": "40–55%", "desc": "Long-term supply agreements with hotels, hospitals, restaurant chains, and institutional food buyers requiring guaranteed supply." },
+      { "title": "Subscription Tiers", "model": "Monthly recurring", "margin": "80–90%", "desc": "Premium membership tiers for both B2B buyers (priority supply, analytics dashboards) and B2C consumers (free delivery, discounts)." }
+    ]
+  },
+  "havesta_content_competitive": {
+    "badge": "Competitive Moat",
+    "headlineLine1": "Why Havesta",
+    "headlineLine2": "Wins the Market",
+    "subheadline": "No competitor has integrated cold-chain, technology, and dual-sided commerce into one platform. Havesta's infrastructure creates deep switching costs and compounding network effects.",
+    "features": ["Cold-chain logistics network", "Real-time IoT monitoring", "B2B + B2C dual model", "Smart warehousing", "Digital marketplace", "Farmer onboarding", "Data intelligence layer", "Last-mile delivery", "Subscription revenue"],
+    "moats": [
+      { "title": "Cold-Chain Scarcity", "desc": "Physical infrastructure is expensive to replicate — creating high barriers to entry for digital-only competitors." },
+      { "title": "Network Effects", "desc": "More farmers attract more buyers; more buyers attract more farmers — creating compounding value with scale." },
+      { "title": "Data Intelligence", "desc": "Every transaction and delivery builds proprietary data for demand forecasting, route optimization, and supply prediction." }
+    ]
+  },
+  "havesta_content_technology": {
+    "badge": "Technology & Infrastructure",
+    "headlineLine1": "Software-Defined",
+    "headlineLine2": "Food Logistics",
+    "subheadline": "Havesta is a technology company that operates physical infrastructure — not a logistics company that uses software. The distinction defines our scalability and margin profile.",
+    "pillars": [
+      { "title": "Real-Time Logistics Engine", "tag": "Logistics AI", "desc": "AI-powered route optimization and dynamic dispatch system that coordinates fleet movements, reduces transit time by 40%, and ensures on-time cold-chain delivery." },
+      { "title": "IoT Cold-Chain Monitoring", "tag": "IoT Infrastructure", "desc": "Hardware sensors embedded throughout storage facilities and delivery vehicles continuously monitor temperature, humidity, and product integrity in real-time." },
+      { "title": "Geospatial Intelligence", "tag": "Geo-Intelligence", "desc": "Proprietary mapping and geo-data layer that identifies demand clusters, optimizes warehouse positioning, and predicts last-mile delivery windows at street level." },
+      { "title": "Supply Chain Data Platform", "tag": "Data Platform", "desc": "Centralized data warehouse collecting SKU-level inventory, pricing, delivery, and farmer data — enabling actionable intelligence across the entire supply chain." },
+      { "title": "Demand Forecasting", "tag": "ML / Forecasting", "desc": "Machine learning models trained on historical order data, seasonal patterns, and market signals to predict demand and reduce food waste through proactive supply planning." },
+      { "title": "Vendor & Farmer OS", "tag": "Mobile-First", "desc": "Mobile-first dashboard for farmers and vendors to manage inventory, track payments, view demand forecasts, and receive smart logistics alerts — accessible on USSD and app." }
+    ]
+  },
+  "havesta_content_traction": {
+    "badge": "Traction & Roadmap",
+    "headlineLine1": "Building Towards",
+    "headlineLine2": "Continental Scale",
+    "subheadline": "Havesta is at pre-seed stage — platform built, first pilots underway, and a clear path from $50K validation round through seed to Series A and continental scale.",
+    "milestones": [
+      { "phase": "Q1 2025", "title": "Concept & Validation", "desc": "Business model validated, founding team formed, initial farmer and B2B interviews completed in Lagos.", "done": true },
+      { "phase": "Q2 2025", "title": "MVP Development", "desc": "Core marketplace and logistics platform MVP built. First pilot conversations with Lagos restaurants and food retailers.", "done": true },
+      { "phase": "Q3 2025", "title": "Pre-Seed Close ($50K)", "desc": "Close $50,000 pre-seed. Deploy cold-chain pilot unit, onboard first 20 farmers, sign 5 B2B clients.", "done": false },
+      { "phase": "Q4 2025", "title": "Lagos Pilot Launch", "desc": "Live operations in Lagos — cold-chain delivery, marketplace transactions, and B2B supply contracts activated.", "done": false },
+      { "phase": "Q2 2026", "title": "Seed Round ($500K)", "desc": "Raise seed round on proven unit economics. Expand to Abuja, grow farmer network to 500+, 50+ B2B clients.", "done": false },
+      { "phase": "2027", "title": "Series A & Pan-Africa", "desc": "Raise Series A. Expand into Ghana, Kenya, and additional Nigerian cities with proven cold-chain model.", "done": false }
+    ],
+    "projections": [
+      { "label": "Farmers Onboarded", "year1": "20–50", "year3": "5,000+" },
+      { "label": "B2B Clients", "year1": "5–10", "year3": "500+" },
+      { "label": "Monthly GMV", "year1": "$10K–$20K", "year3": "$2M+" },
+      { "label": "Cities Covered", "year1": "1 (Lagos)", "year3": "4+" }
+    ]
+  },
+  "havesta_content_team": {
+    "badge": "The Team",
+    "headlineLine1": "Operators Who",
+    "headlineLine2": "Know This Market",
+    "subheadline": "Our team combines deep African logistics and operations expertise with world-class technology experience — built to execute, not just pitch.",
+    "members": [
+      { "name": "Adewale Okonkwo", "role": "CEO & Co-Founder", "bio": "Former operations lead at a Pan-African logistics firm. 8+ years in supply chain and food distribution across West Africa. MBA, Lagos Business School.", "initials": "AO", "tag": "Operations · Strategy" },
+      { "name": "Chidinma Eze", "role": "CTO & Co-Founder", "bio": "Ex-Senior Engineer at Flutterwave. Built marketplace and payments infrastructure at scale. MSc Computer Science, UCL. Full-stack and systems architecture.", "initials": "CE", "tag": "Engineering · Architecture" },
+      { "name": "Emeka Nwosu", "role": "VP Growth", "bio": "Built merchant networks for two leading Nigerian fintech startups. Specialist in B2B sales, partnership development, and market expansion across Nigeria.", "initials": "EN", "tag": "Growth · BD" },
+      { "name": "Amara Osei", "role": "VP Marketing & Brand", "bio": "Brand strategist with experience across Jumia, Andela, and Pan-African FMCG brands. Builds category-defining go-to-market strategies for tech startups.", "initials": "AO", "tag": "Brand · GTM" }
+    ],
+    "advisors": [
+      { "name": "Dr. Fatima Bello", "role": "AgriTech Policy Advisor", "org": "Former Director, NAFDAC" },
+      { "name": "James Kariuki", "role": "Logistics Infrastructure", "org": "Ex-VP, DHL Africa" },
+      { "name": "Ngozi Adichie-Obi", "role": "Africa VC Networks", "org": "Partner, TLCom Capital" }
+    ]
+  },
+  "havesta_content_investment": {
+    "badge": "Investment Opportunity",
+    "headlineLine1": "Join Us in Building",
+    "headlineLine2": "Africa's Food Future",
+    "subheadline": "Havesta is raising a $50,000 pre-seed round to validate cold-chain logistics, complete the MVP platform, and onboard the first batch of farmers and B2B clients in Lagos.",
+    "terms": [
+      { "label": "Round Type", "val": "Pre-Seed" },
+      { "label": "Raise Target", "val": "$50,000 USD" },
+      { "label": "Instrument", "val": "SAFE" },
+      { "label": "Valuation Cap", "val": "$1,500,000" },
+      { "label": "Min. Ticket", "val": "$5,000 USD" },
+      { "label": "Runway", "val": "~10 months" }
+    ],
+    "useOfFunds": [
+      { "label": "Cold-Chain Pilot Infrastructure", "pct": "40", "desc": "Initial fleet deposit, cold-storage pilot unit, IoT sensors ($20,000)" },
+      { "label": "Technology & Product", "pct": "25", "desc": "Platform development, MVP completion, mobile apps ($12,500)" },
+      { "label": "Team & Operations", "pct": "20", "desc": "Key early hires, operations setup, contractor costs ($10,000)" },
+      { "label": "Sales & Market Testing", "pct": "15", "desc": "B2B outreach, farmer onboarding, early marketing ($7,500)" }
+    ],
+    "formTitle": "Request Investor Materials",
+    "formButtonLabel": "Request Investor Deck",
+    "formNote": "We respond within 24 hours. No spam, ever."
+  },
+  "havesta_content_executiveSummary": {
+    "badge": "Executive Summary",
+    "headlineLine1": "The Investment",
+    "headlineLine2": "Case for Havesta",
+    "subheadline": "A structured overview of our business, market, model, and opportunity for investors evaluating Havesta's seed round.",
+    "keyMetrics": [
+      { "label": "Pre-Seed Round", "value": "$50K" },
+      { "label": "TAM by 2030", "value": "$1T+" },
+      { "label": "Annual Food Wastage (NG)", "value": "$9B" },
+      { "label": "Valuation Cap", "value": "$1.5M" },
+      { "label": "Runway", "value": "~10 months" },
+      { "label": "Target Close", "value": "Q3 2025" }
+    ],
+    "financialRows": [
+      { "metric": "Monthly GMV (EoY)", "y1": "$15K", "y2": "$250K", "y3": "$2M" },
+      { "metric": "Annual Revenue", "y1": "$50K", "y2": "$600K", "y3": "$8M" },
+      { "metric": "Gross Margin", "y1": "28%", "y2": "38%", "y3": "50%" },
+      { "metric": "EBITDA", "y1": "($45K)", "y2": "($100K)", "y3": "$1.2M" },
+      { "metric": "Farmers Onboarded", "y1": "20–50", "y2": "500+", "y3": "5,000+" },
+      { "metric": "B2B Clients", "y1": "5–10", "y2": "80+", "y3": "500+" },
+      { "metric": "Cities Operational", "y1": "1 (Lagos)", "y2": "2", "y3": "4+" }
+    ]
+  },
+  "havesta_content_safeAgreement": {
+    "badge": "Legal Documents",
+    "headlineLine1": "SAFE Agreement",
+    "headlineLine2": "Template",
+    "subheadline": "Our standard Simple Agreement for Future Equity — modelled on the Y Combinator SAFE framework, adapted for Nigerian law. Investors may execute a customised version at their preferred terms.",
+    "standardTerms": [
+      { "k": "Instrument", "v": "SAFE (Post-Money)" },
+      { "k": "Round", "v": "Pre-Seed" },
+      { "k": "Raise Target", "v": "$50,000" },
+      { "k": "Valuation Cap", "v": "$1,500,000" },
+      { "k": "Discount Rate", "v": "20%" },
+      { "k": "Min. Ticket", "v": "$5,000" },
+      { "k": "Pro-Rata Rights", "v": "Included" },
+      { "k": "MFN Clause", "v": "Included" },
+      { "k": "Interest", "v": "None" },
+      { "k": "Maturity Date", "v": "None" },
+      { "k": "Governing Law", "v": "Nigeria" }
+    ]
+  },
+  "havesta_content_finalCTA": {
+    "badge": "Pre-Seed Round Open · $50,000",
+    "headlineLine1": "The Infrastructure",
+    "headlineLine2": "Africa Has Been Waiting For",
+    "subheadline": "Havesta is not building another food delivery app. We are building the cold-chain backbone that will move Africa's agricultural economy from fragmented and wasteful to integrated and intelligent.",
+    "cta1Label": "Request Investor Deck",
+    "cta2Label": "Schedule a Call",
+    "contactInfo": ["urutechenterprise@gmail.com", "havesta.co", "Lagos, Nigeria"]
+  },
+  "havesta_content_footer": {
+    "companyName": "Havesta Logistics Limited",
+    "copyrightYear": "2025",
+    "address": "Lagos, Nigeria",
+    "badge": "CAC Registered",
+    "email": "urutechenterprise@gmail.com",
+    "phone": ""
+  },
+  "havesta_content_emailGate": {
+    "siteLabel": "Investor Portal · Confidential",
+    "accessBadge": "Access Required",
+    "headline": "Enter your email to access the Havesta investor deck.",
+    "description": "This site is intended for investors and partners. Enter your email below — we may follow up with updates.",
+    "placeholder": "your@email.com",
+    "buttonLabel": "Access the Investor Site",
+    "disclaimer": "By continuing you confirm you are an accredited investor or authorised recipient. Your email will not be shared with third parties.",
+    "footerNote": "© 2025 Havesta Logistics Limited · Lagos, Nigeria · CAC Registered"
+  }
+}
