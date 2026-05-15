@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Havesta — Investor Deck v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  :root{
+    --cream:#F4EEDF;    /* warm cream */
+    --bg-2:#EBE2CB;
+    --paper:#FBF6E9;
+    --ink:#0F1410;
+    --ink-2:#2A2F26;
+    --muted:#6E6A5C;
+    --line:#0F141022;
+    --line-2:#0F141044;
+    --green:#15402A;
+    --green-2:#0E2D1E;
+    --leaf:#3D7A4C;
+    --amber:#D17A1F;
+    --amber-2:#F0A742;
+    --tomato:#C24222;
+    --white:#FFFFFF;
+  }
+  html,body{ margin:0; background:#0a0a08; color:var(--ink); font-family:"Geist", ui-sans-serif, system-ui, sans-serif; }
+  section{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Geist", ui-sans-serif, system-ui, sans-serif;
+    font-size:24px;
+    line-height:1.45;
+    letter-spacing:-0.005em;
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* ===== TYPE SYSTEM ===== */
+  .display{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700;
+    font-variation-settings:"wdth" 100;
+    letter-spacing:-0.035em;
+    line-height:0.92;
+  }
+  .display-cond{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700;
+    font-variation-settings:"wdth" 85;
+    letter-spacing:-0.03em;
+    line-height:0.9;
+  }
+  .mono{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:14px; letter-spacing:0.18em; text-transform:uppercase;
+    font-weight:500;
+  }
+  .eyebrow{
+    font-family:"JetBrains Mono", monospace;
+    font-size:14px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--muted); font-weight:500;
+  }
+
+  /* ===== CHROME ===== */
+  .chrome-top, .chrome-bot{
+    position:absolute; left:80px; right:80px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:"JetBrains Mono", monospace;
+    font-size:13px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--muted); font-weight:500;
+  }
+  .chrome-top{ top:48px; }
+  .chrome-bot{ bottom:48px; }
+  .wordmark{ display:inline-flex; align-items:center; gap:14px; color:var(--ink); }
+  .wordmark .logo{
+    width:140px; height:34px;
+    background-image:url('assets/havesta-logo.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:left center;
+  }
+  .wordmark .name{ display:none; }
+
+  /* on dark slides — render logo white to stay legible on the deep green */
+  .dark .chrome-top, .dark .chrome-bot{ color:#C7BEA4; }
+  .dark .wordmark .logo{ filter: brightness(0) invert(1); }
+
+  .frame{
+    position:absolute;
+    inset:120px 80px 100px 80px;
+    display:flex; flex-direction:column;
+  }
+
+  /* ===== SHARED ===== */
+  .pill{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:8px 16px; border:1px solid var(--line-2); border-radius:999px;
+    font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--ink); background:var(--paper);
+  }
+  .pill.solid{ background:var(--green); color:var(--cream); border-color:var(--green);}
+  .pill .pulse{ width:9px; height:9px; border-radius:50%; background:var(--amber-2);
+    box-shadow:0 0 0 5px rgba(240,167,66,.22);}
+
+  .h-rule{ height:1px; background:var(--line-2); }
+  .h-rule.dark{ background:#FFFFFF22; }
+
+  .slide-title{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700; letter-spacing:-0.035em; line-height:0.92;
+    margin:0; color:var(--ink);
+  }
+
+  /* ============================================================
+     01 — COVER
+  ============================================================ */
+  .s-cover{ background:var(--green); color:var(--cream); }
+  .s-cover .frame{ inset:120px 80px 100px 80px; display:grid; grid-template-columns: 1.05fr 1fr; gap:64px; align-items:stretch;}
+  .cover-grad{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(900px 600px at 95% 105%, #2a5a3d 0%, transparent 55%),
+      radial-gradient(700px 500px at -5% -10%, #1e4a32 0%, transparent 50%),
+      var(--green);
+  }
+  .s-cover .left{ display:flex; flex-direction:column; justify-content:space-between;}
+  .s-cover h1{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700; font-variation-settings:"wdth" 90;
+    font-size:132px; line-height:0.9; letter-spacing:-0.04em;
+    margin:0; color:var(--cream);
+  }
+  .s-cover h1 .amber{ color:var(--amber-2); }
+  .s-cover .tag{
+    font-size:22px; line-height:1.4; max-width:560px; color:#D9D0B5; letter-spacing:-0.005em; margin:0;
+  }
+  .s-cover .meta{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:14px 32px;
+    padding-top:24px; border-top:1px solid #FFFFFF26;
+  }
+  .s-cover .meta .k{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#A89E84; }
+  .s-cover .meta .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:22px; line-height:1; margin-top:6px; letter-spacing:-0.02em; color:var(--cream); }
+
+  .s-cover .right{ display:flex; flex-direction:column; gap:18px;}
+  .s-cover .hero{
+    flex:1; position:relative; border-radius:24px; overflow:hidden;
+    min-height:600px;
+  }
+  .s-cover .hero image-slot{ width:100%; height:100%; border-radius:24px;}
+
+  /* ============================================================
+     02 — PROBLEM (one giant stat)
+  ============================================================ */
+  .s-problem .frame{ display:flex; flex-direction:column; gap:0; }
+  .s-problem .top-row{
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .s-problem .mid{
+    flex:1; display:grid; grid-template-columns: 1.1fr 1fr; gap:48px; align-items:stretch; padding:16px 0;
+  }
+  .s-problem .photo-frame{
+    position:relative; border-radius:22px; overflow:hidden; min-height:380px;
+  }
+  .s-problem .photo-frame image-slot{ width:100%; height:100%; border-radius:22px;}
+  .s-problem .stat-side{
+    display:flex; flex-direction:column; justify-content:center; gap:48px;
+    align-items:flex-start;
+  }
+  .stat-mega{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700; font-variation-settings:"wdth" 90;
+    font-size:280px; line-height:0.85; letter-spacing:-0.06em;
+    margin:0; color:var(--green);
+  }
+  .stat-mega .pct{ font-size:140px; vertical-align:super; line-height:0.8; }
+  .s-problem .stat-caption{
+    max-width:480px;
+  }
+  .s-problem .stat-caption h3{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:600; font-size:32px; line-height:1.1; margin:0 0 10px; letter-spacing:-0.025em;
+  }
+  .s-problem .stat-caption p{ font-size:17px; color:var(--ink-2); margin:0; line-height:1.45;}
+
+  .s-problem .bottom-row{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border-top:2px solid var(--ink); padding-top:24px;
+  }
+  .s-problem .bottom-row > div{ padding-right:24px; }
+  .s-problem .bottom-row .k{
+    font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);
+  }
+  .s-problem .bottom-row .n{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:88px; line-height:0.95; margin-top:8px; color:var(--ink); letter-spacing:-0.03em;
+  }
+  .s-problem .bottom-row .d{ font-size:17px; color:var(--ink-2); margin-top:4px;}
+
+  /* ============================================================
+     03 — WHY NOW (4 cards)
+  ============================================================ */
+  .head-row{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:48px; margin-bottom:36px;
+  }
+  .head-row h2{ font-size:104px; max-width:1300px;}
+  .head-row .right{ text-align:right; min-width:240px; padding-bottom:12px;}
+
+  .why-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px; flex:1; align-content:stretch;
+  }
+  .why-card{
+    background:var(--paper); border-radius:18px;
+    padding:32px; display:flex; flex-direction:column; gap:18px;
+    border:1px solid var(--line);
+  }
+  .why-card .n{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:88px; line-height:0.85; color:var(--amber); letter-spacing:-0.04em;
+  }
+  .why-card h3{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:32px; line-height:1.05; margin:0; letter-spacing:-0.02em;
+  }
+  .why-card p{ margin:0; font-size:18px; color:var(--ink-2); line-height:1.4;}
+  .why-card .tag{ margin-top:auto; align-self:flex-start;}
+
+  /* ============================================================
+     04 — SOLUTION
+  ============================================================ */
+  .sol-grid{ display:grid; grid-template-columns:1fr 1.05fr; gap:48px; flex:1; min-height:0;}
+  .sol-left{ display:flex; flex-direction:column; gap:18px; max-width:620px; min-height:0;}
+  .sol-photo{
+    position:relative; border-radius:22px; overflow:hidden; height:240px; flex-shrink:0;
+  }
+  .sol-photo image-slot{ width:100%; height:100%; border-radius:22px;}
+  .sol-left h3{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:46px; line-height:1; margin:0; letter-spacing:-0.025em; color:var(--green);
+  }
+  .sol-left p{ font-size:19px; line-height:1.45; margin:0; color:var(--ink-2);}
+  .sol-left .points{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:auto; padding-top:20px; border-top:2px solid var(--ink);
+  }
+  .sol-left .points .k{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber);}
+  .sol-left .points .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:21px; line-height:1.15; margin-top:6px; letter-spacing:-0.015em; color:var(--ink);}
+
+  .stack{
+    display:flex; flex-direction:column; gap:8px; align-self:start;
+  }
+  .stack-row{
+    display:grid; grid-template-columns:50px 1fr auto; align-items:center; gap:18px;
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:14px 20px;
+  }
+  .stack-row .lvl{
+    font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.14em; color:var(--muted);
+  }
+  .stack-row .nm{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:23px; line-height:1; letter-spacing:-0.02em;
+  }
+  .stack-row .nm span{
+    display:block; font-family:"Geist", sans-serif; font-weight:400; font-size:14px; color:var(--muted); margin-top:5px; letter-spacing:0;
+  }
+  .stack-row .pill-sm{
+    font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    padding:6px 12px; border-radius:999px; border:1px solid var(--line-2);
+    color:var(--ink-2);
+  }
+  .stack-row.hl{ background:var(--green); border-color:var(--green); color:var(--cream);}
+  .stack-row.hl .lvl{ color:#A89E84;}
+  .stack-row.hl .nm span{ color:#C7BEA4;}
+  .stack-row.hl .pill-sm{ background:#FFFFFF15; color:var(--cream); border-color:#FFFFFF30;}
+
+  /* ============================================================
+     05 — HOW IT WORKS
+  ============================================================ */
+  .flow-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px; flex:1; align-content:stretch;
+  }
+  .flow-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:28px 26px; display:flex; flex-direction:column; gap:14px;
+    position:relative;
+  }
+  .flow-card .step{
+    font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--amber); font-weight:600;
+  }
+  .flow-card h4{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:34px; margin:0; line-height:1; letter-spacing:-0.025em;}
+  .flow-card p{ margin:0; font-size:17px; line-height:1.4; color:var(--ink-2);}
+  .flow-card .ico{
+    width:62px; height:62px; border-radius:14px; background:var(--green); display:flex; align-items:center; justify-content:center; color:var(--cream);
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:30px;
+  }
+  .flow-row .flow-card:nth-child(odd) .ico{ background:var(--green); }
+  .flow-row .flow-card:nth-child(even) .ico{ background:var(--amber); }
+  .flow-after{
+    margin-top:28px; padding-top:22px; border-top:2px solid var(--ink);
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  }
+  .flow-after > div{ padding-right:24px;}
+  .flow-after .k{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);}
+  .flow-after .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:26px; line-height:1.1; margin-top:8px; letter-spacing:-0.02em;}
+
+  /* ============================================================
+     06 — MARKET
+  ============================================================ */
+  .mkt-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:80px; flex:1; align-items:stretch;}
+  .mkt-circles{ position:relative; display:flex; align-items:center; justify-content:center;}
+  .mkt-circles svg{ width:100%; max-width:620px; height:auto;}
+  .mkt-right{ display:flex; flex-direction:column; gap:14px;}
+  .mkt-right h3{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:54px; margin:0 0 20px; line-height:1.0; letter-spacing:-0.025em;
+  }
+  .mkt-card{
+    display:grid; grid-template-columns:150px 1fr; gap:24px; padding:22px 0; border-top:1px solid var(--line);
+  }
+  .mkt-card:last-child{ border-bottom:1px solid var(--line);}
+  .mkt-card .lbl{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);}
+  .mkt-card .amt{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:48px; line-height:0.95; margin-top:6px; letter-spacing:-0.03em;}
+  .mkt-card .amt.green{ color:var(--green);}
+  .mkt-card .amt.leaf{ color:var(--leaf);}
+  .mkt-card .amt.amber{ color:var(--amber);}
+  .mkt-card .d{ font-size:18px; color:var(--ink-2); line-height:1.4; align-self:center;}
+
+  /* ============================================================
+     07 — BUSINESS MODEL
+  ============================================================ */
+  .rev-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; flex:1; align-content:stretch;}
+  .rev-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:24px 26px; display:flex; flex-direction:column; gap:10px; position:relative;
+  }
+  .rev-card.hl{ background:var(--green); border-color:var(--green); color:var(--cream);}
+  .rev-card .lbl{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); font-weight:600;}
+  .rev-card.hl .lbl{ color:var(--amber-2);}
+  .rev-card h4{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:30px; line-height:1; margin:0; letter-spacing:-0.025em;}
+  .rev-card p{ margin:0; font-size:15px; color:var(--ink-2); line-height:1.4;}
+  .rev-card.hl p{ color:#C7BEA4;}
+  .rev-card .num{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:48px; line-height:0.9; margin-top:auto; color:var(--green); letter-spacing:-0.03em;
+  }
+  .rev-card .num span{ font-family:"Bricolage Grotesque", sans-serif; }
+  .rev-card.hl .num{ color:var(--amber-2);}
+
+  /* ============================================================
+     08 — GTM
+  ============================================================ */
+  .gtm-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; flex:1; align-content:stretch;}
+  .gtm-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:32px; display:flex; flex-direction:column; gap:18px; position:relative;
+  }
+  .gtm-card .badge{
+    display:inline-flex; padding:8px 16px; border-radius:999px;
+    background:var(--green); color:var(--cream);
+    font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; align-self:flex-start;
+  }
+  .gtm-card:nth-child(2) .badge{ background:var(--amber); color:var(--white);}
+  .gtm-card:nth-child(3) .badge{ background:var(--ink); color:var(--cream);}
+  .gtm-card h3{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:44px; line-height:0.98; margin:0; letter-spacing:-0.025em;
+  }
+  .gtm-card .when{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.12em; color:var(--muted);}
+  .gtm-card ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0;}
+  .gtm-card ul li{
+    padding:14px 0; border-top:1px solid var(--line); font-size:17px; color:var(--ink-2);
+    display:grid; grid-template-columns:24px 1fr; gap:8px; line-height:1.35;
+  }
+  .gtm-card ul li:last-child{ border-bottom:1px solid var(--line);}
+  .gtm-card ul li::before{
+    content:""; width:8px; height:8px; background:var(--green); border-radius:50%; margin-top:9px;
+  }
+  .gtm-card:nth-child(2) ul li::before{ background:var(--amber);}
+  .gtm-card:nth-child(3) ul li::before{ background:var(--ink);}
+
+  /* ============================================================
+     09 — COMPETITION
+  ============================================================ */
+  .cmp{ flex:1; display:flex; flex-direction:column; border-radius:20px; overflow:hidden; border:1px solid var(--line); background:var(--paper);}
+  .cmp .row{ display:grid; grid-template-columns:1.5fr repeat(6,1fr); border-bottom:1px solid var(--line);}
+  .cmp .row:last-child{ border-bottom:none;}
+  .cmp .cell{ padding:22px 16px; border-right:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .cmp .cell:last-child{ border-right:none;}
+  .cmp .cell.nm{ justify-content:flex-start; font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:22px; letter-spacing:-0.02em;}
+  .cmp .row.head{ background:var(--bg-2);}
+  .cmp .row.head .cell{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); justify-content:center; text-align:center; line-height:1.2; font-weight:500;}
+  .cmp .row.head .cell.nm{ justify-content:flex-start;}
+  .cmp .row.us{ background:var(--green); color:var(--cream);}
+  .cmp .row.us .cell{ border-right-color:#FFFFFF22;}
+  .cmp .row.us .cell.nm{ color:var(--cream); font-weight:700;}
+  .ck{
+    width:32px; height:32px; border-radius:50%; background:var(--green); display:inline-flex; align-items:center; justify-content:center; color:var(--cream);
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700;
+  }
+  .ck::after{ content:""; width:8px; height:14px; border:solid var(--cream); border-width:0 3px 3px 0; transform:rotate(45deg); margin-top:-3px;}
+  .row.us .ck{ background:var(--amber-2);}
+  .row.us .ck::after{ border-color:var(--green-2);}
+  .dh{ width:24px; height:3px; background:var(--line-2); display:inline-block; border-radius:2px;}
+  .row.us .dh{ background:#FFFFFF44;}
+  .moat-band{
+    margin-top:22px; padding:24px 32px; border-radius:18px;
+    background:var(--green); color:var(--cream);
+    display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center;
+  }
+  .moat-band .lbl{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber-2); font-weight:600;}
+  .moat-band .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:26px; line-height:1.2; letter-spacing:-0.02em;}
+
+  /* ============================================================
+     10 — TRACTION
+  ============================================================ */
+  .trac-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; flex:1;}
+  .trac-stats{ display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .trac-stat{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:32px; display:flex; flex-direction:column; gap:10px;
+  }
+  .trac-stat.hl{ background:var(--green); color:var(--cream); border-color:var(--green);}
+  .trac-stat .n{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:118px; line-height:0.85; letter-spacing:-0.04em; color:var(--green);
+  }
+  .trac-stat.hl .n{ color:var(--amber-2);}
+  .trac-stat .l{ font-size:16px; line-height:1.4;}
+  .trac-stat.hl .l{ color:#C7BEA4;}
+  .trac-stat .tag{ margin-top:auto; font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); font-weight:600;}
+  .trac-stat.hl .tag{ color:var(--amber-2);}
+
+  .ms-list{ display:flex; flex-direction:column; gap:0;}
+  .ms-list .ms{
+    display:grid; grid-template-columns:130px 1fr; gap:16px; padding:18px 0; border-top:1px solid var(--line);
+  }
+  .ms-list .ms:last-child{ border-bottom:1px solid var(--line);}
+  .ms-list .d{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.14em; color:var(--amber); font-weight:600; padding-top:6px;}
+  .ms-list .t{ font-size:18px; color:var(--ink); line-height:1.35;}
+  .ms-list .t b{ font-weight:600;}
+
+  /* ============================================================
+     11 — TEAM
+  ============================================================ */
+  .team-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; flex:1; align-content:stretch;}
+  .person{
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .person .avatar{
+    aspect-ratio:1/1; border-radius:20px;
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .person .avatar .init{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight:700; font-size:140px; line-height:0.85;
+    letter-spacing:-0.05em; color:#FFFFFF;
+  }
+  .person:nth-child(1) .avatar{ background:linear-gradient(140deg, #1f5a3c 0%, #15402A 100%); }
+  .person:nth-child(2) .avatar{ background:linear-gradient(140deg, #E4A648 0%, #C77F1F 100%); }
+  .person:nth-child(3) .avatar{ background:linear-gradient(140deg, #2A2F26 0%, #0F1410 100%); }
+  .person:nth-child(4) .avatar{ background:linear-gradient(140deg, #C24222 0%, #8B2A14 100%); }
+  .person .avatar .ph-tag{
+    position:absolute; top:14px; left:14px; z-index:2;
+    font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    color:#fff; background:rgba(0,0,0,0.35); padding:6px 10px; border-radius:999px; backdrop-filter:blur(4px);
+  }
+  .person .role{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); font-weight:600;}
+  .person h4{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:30px; line-height:1.05; margin:0; letter-spacing:-0.025em;}
+  .person p{ margin:0; font-size:15px; color:var(--ink-2); line-height:1.4;}
+
+  .advisor-band{
+    margin-top:24px; padding:20px 28px; border-radius:14px;
+    background:var(--paper); border:1px solid var(--line);
+    display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center;
+  }
+  .advisor-band .k{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);}
+  .advisor-band .v{ font-size:17px; color:var(--ink-2);}
+
+  /* ============================================================
+     12 — FINANCIALS
+  ============================================================ */
+  .fin-grid{ display:grid; grid-template-columns:1.25fr 1fr; gap:48px; flex:1; min-height:0;}
+  .fin-chart{ display:flex; flex-direction:column; min-height:0;}
+  .chart-area{ flex:1; position:relative; padding:12px 0 0 0; min-height:0;}
+  .chart-area svg{ width:100%; height:100%; display:block;}
+  .x-labels{ display:grid; grid-template-columns:repeat(3,1fr); margin-top:10px; padding:0 20px; flex-shrink:0;}
+  .x-labels span{ text-align:center; font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.14em; color:var(--muted);}
+  .chart-legend{ display:flex; gap:28px; margin-top:10px; flex-shrink:0;}
+  .chart-legend .l{ display:flex; align-items:center; gap:10px; font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2);}
+  .chart-legend .sw{ width:16px; height:16px; border-radius:4px;}
+
+  .fin-side{ display:flex; flex-direction:column; gap:0;}
+  .fin-side h3{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:42px; margin:0 0 18px; line-height:1; letter-spacing:-0.025em;}
+  .fin-row{ display:grid; grid-template-columns:1fr auto; padding:16px 0; border-top:1px solid var(--line); align-items:baseline;}
+  .fin-row:last-child{ border-bottom:1px solid var(--line);}
+  .fin-row .k{ font-size:17px; color:var(--ink-2);}
+  .fin-row .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:26px; line-height:1; color:var(--green); letter-spacing:-0.02em;}
+  .fin-note{
+    margin-top:18px; padding:16px 20px; border-radius:12px; background:var(--bg-2);
+    font-size:14px; color:var(--ink-2); line-height:1.45;
+  }
+
+  /* ============================================================
+     13 — THE ASK
+  ============================================================ */
+  .s-ask{ background:var(--green); color:var(--cream);}
+  .s-ask .head-row h2{ color:var(--cream); font-size:88px;}
+  .s-ask .head-row h2 em{ color:var(--amber-2); font-style:normal;}
+  .ask-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:56px; flex:1; min-height:0;}
+  .ask-num{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700;
+    font-size:320px; line-height:0.78; letter-spacing:-0.06em; color:var(--cream);
+    display:flex; align-items:flex-start; gap:0;
+  }
+  .ask-num .currency{ font-size:140px; color:#C7BEA4; line-height:1; margin-top:24px;}
+  .ask-num .k{ color:var(--amber-2);}
+  .ask-left{ display:flex; flex-direction:column; gap:24px; justify-content:space-between; min-height:0;}
+  .ask-sub{ font-size:19px; line-height:1.4; max-width:560px; color:#C7BEA4;}
+  .ask-terms{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:0;
+    border-top:1px solid #FFFFFF22;
+  }
+  .ask-terms > div{ padding:14px 24px 0 0; border-right:1px solid #FFFFFF22;}
+  .ask-terms > div:nth-child(2){ border-right:none; padding-left:24px;}
+  .ask-terms > div:nth-child(3){ padding-top:14px;}
+  .ask-terms > div:nth-child(4){ border-right:none; padding-left:24px; padding-top:14px;}
+  .ask-terms .k{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#A89E84;}
+  .ask-terms .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:26px; line-height:1; margin-top:6px; color:var(--cream); letter-spacing:-0.02em;}
+
+  .uof{ display:flex; flex-direction:column; gap:0;}
+  .uof-title{ font-family:"JetBrains Mono", monospace; font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber-2); margin-bottom:18px; font-weight:600;}
+  .uof-row{
+    display:grid; grid-template-columns:60px 1fr 90px; gap:18px; align-items:center;
+    padding:10px 0; border-top:1px solid #FFFFFF22;
+  }
+  .uof-row:last-child{ border-bottom:1px solid #FFFFFF22;}
+  .uof-row .pct{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:26px; color:var(--amber-2); line-height:1; letter-spacing:-0.025em; text-align:right;}
+  .uof-row .nm{ font-size:16px; color:var(--cream);}
+  .uof-row .bar{ position:relative; height:10px; background:#FFFFFF12; border-radius:6px;}
+  .uof-row .bar i{ position:absolute; left:0; top:0; bottom:0; background:var(--amber-2); border-radius:6px; display:block;}
+
+  /* ============================================================
+     14 — CLOSING
+  ============================================================ */
+  .s-close{ background:var(--cream);}
+  .s-close .frame{ display:flex; flex-direction:column;}
+  .close-top{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap:48px; align-items:stretch; flex:1;
+  }
+  .close-headline{
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:700;
+    font-size:130px; line-height:0.95; letter-spacing:-0.04em; margin:0;
+  }
+  .close-headline .green{ color:var(--green);}
+  .close-headline .amber{ color:var(--amber);}
+  .close-photo{
+    position:relative; border-radius:24px; overflow:hidden;
+  }
+  .close-photo image-slot{ width:100%; height:100%; border-radius:24px;}
+
+  .close-grid{
+    display:grid; grid-template-columns:1.4fr 1fr; gap:64px; padding-top:36px;
+    border-top:2px solid var(--ink); margin-top:36px;
+  }
+  .close-blurb h4{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:24px; margin:0 0 12px; letter-spacing:-0.02em;}
+  .close-blurb p{ margin:0; font-size:17px; line-height:1.5; color:var(--ink-2);}
+  .close-cols{ display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .contact{ display:flex; flex-direction:column; gap:14px; align-items:flex-end; justify-content:space-between;}
+  .contact .row{ text-align:right;}
+  .contact .k{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);}
+  .contact .v{ font-family:"Bricolage Grotesque", sans-serif; font-weight:700; font-size:30px; line-height:1.1; color:var(--ink); margin-top:6px; letter-spacing:-0.02em;}
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:14px;
+    padding:18px 28px; background:var(--green); color:var(--cream);
+    border-radius:999px;
+    font-family:"Bricolage Grotesque", sans-serif; font-weight:600; font-size:22px;
+    letter-spacing:-0.01em;
+    align-self:flex-end;
+  }
+  .cta-btn .arrow{ width:24px; height:14px; position:relative;}
+  .cta-btn .arrow::before{ content:""; position:absolute; top:50%; left:0; right:0; height:2px; background:var(--cream); transform:translateY(-50%);}
+  .cta-btn .arrow::after{ content:""; position:absolute; top:50%; right:0; width:10px; height:10px; border-top:2px solid var(--cream); border-right:2px solid var(--cream); transform:translateY(-50%) rotate(45deg);}
+
+  /* ===== IMAGE SLOTS ===== */
+  image-slot{
+    --is-bg:#1B3A2A;
+    --is-fg:#C7BEA4;
+    --is-border:#FFFFFF22;
+    --is-border-hover:#F0A742;
+    --is-radius:18px;
+    border-radius:18px;
+    overflow:hidden;
+  }
+  image-slot[data-light]{
+    --is-bg:#EBE2CB;
+    --is-fg:#6E6A5C;
+    --is-border:#0F141022;
+  }
+  /* fallback patterned bg for empty slots — adds visual texture */
+  .img-frame{
+    position:relative; overflow:hidden; border-radius:18px;
+  }
+  .img-frame .pattern{
+    position:absolute; inset:0; opacity:.95;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 14px, transparent 14px 28px),
+      linear-gradient(180deg, #1f4a32 0%, #15402A 100%);
+  }
+  .img-frame .pattern.amber{
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px),
+      linear-gradient(180deg, #E4A648 0%, #C77F1F 100%);
+  }
+  .img-frame .label-tag{
+    position:absolute; top:18px; left:18px;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:7px 13px; border-radius:999px;
+    background:rgba(0,0,0,0.32); backdrop-filter:blur(4px);
+    color:#fff; font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500;
+    z-index:2;
+  }
+  .img-frame .label-tag .dot{ width:7px; height:7px; border-radius:50%; background:#F0A742;}
+
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+  <!-- ======================================================================
+       01 — COVER
+  ====================================================================== -->
+  <section data-screen-label="01 Cover" class="s-cover dark">
+    <div class="cover-grad"></div>
+
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Pre-Seed Round · May 2026 · Confidential</div>
+    </div>
+
+    <div class="frame">
+      <div class="left">
+        <div>
+          <span class="pill solid" style="background:#FFFFFF18; color:var(--cream); border-color:#FFFFFF40;">
+            <span class="pulse"></span> Investor Memo
+          </span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:32px;">
+          <h1>
+            Building Africa's<br/>
+            <span class="amber">cold-chain</span><br/>
+            food infrastructure.
+          </h1>
+          <p class="tag">
+            A technology-enabled food distribution platform connecting farmers to businesses
+            and consumers through cold-chain logistics, smart warehousing, and a digital
+            marketplace — built for Nigeria, scaling across Africa.
+          </p>
+        </div>
+
+        <div class="meta">
+          <div><div class="k">Stage</div><div class="v">Pre-Seed</div></div>
+          <div><div class="k">Raising</div><div class="v">$50,000</div></div>
+          <div><div class="k">Sector</div><div class="v">AgriTech · Infra</div></div>
+          <div><div class="k">HQ</div><div class="v">Lagos, Nigeria</div></div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="hero img-frame">
+          <div class="pattern"></div>
+          <span class="label-tag"><span class="dot"></span> Hero image</span>
+          <image-slot id="cover-hero" placeholder="Drop a hero photo" src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600&q=80&auto=format&fit=crop"></image-slot>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>01 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       02 — PROBLEM — One giant stat
+  ====================================================================== -->
+  <section data-screen-label="02 Problem" class="s-problem">
+
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>The Problem · 02</div>
+    </div>
+
+    <div class="frame">
+      <div class="top-row">
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px;">Section 01 · The problem</div>
+          <h2 class="slide-title" style="font-size:72px; max-width:1100px;">
+            Africa's food system<br/>
+            <span style="color:var(--amber)">is broken.</span>
+          </h2>
+        </div>
+        <div style="text-align:right;">
+          <span class="pill">⛅ Cold-chain gap</span>
+        </div>
+      </div>
+
+      <div class="mid">
+        <div class="photo-frame img-frame">
+          <div class="pattern"></div>
+          <span class="label-tag"><span class="dot"></span> Farm-to-market scene</span>
+          <image-slot id="problem-photo" placeholder="Drop a photo" src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80&auto=format&fit=crop"></image-slot>
+        </div>
+        <div class="stat-side">
+          <div class="stat-mega"><span>40</span><span class="pct">%</span></div>
+          <div class="stat-caption">
+            <h3>of harvested food in Nigeria is lost before reaching consumers — a $9B annual crisis.</h3>
+            <p>Spoiled in transit, stranded at the farm gate, or sold off at distress prices — gone before anyone gets paid for it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-row">
+        <div>
+          <div class="k">Annual food wastage cost</div>
+          <div class="n">$9B</div>
+          <div class="d">Nigeria's annual post-harvest losses — one of the highest on the continent.</div>
+        </div>
+        <div>
+          <div class="k">Cold-chain penetration</div>
+          <div class="n">6%</div>
+          <div class="d">Of Nigeria's supply chain is cold-chain enabled — perishables vulnerable everywhere.</div>
+        </div>
+        <div>
+          <div class="k">Middlemen layers</div>
+          <div class="n">7+</div>
+          <div class="d">Farmers receive as little as 20% of final retail price — chain is fragmented &amp; exploitative.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Sources · FAO, GCCA, NBS, AGRA</div>
+      <div>02 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       03 — WHY NOW
+  ====================================================================== -->
+  <section data-screen-label="03 Why Now">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Why Now · 03</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          The category is<br/>
+          <span style="color:var(--green)">finally investable.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 02</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Market tailwinds · 2025–2030</div>
+        </div>
+      </div>
+
+      <div class="why-row">
+        <div class="why-card">
+          <div class="n">6.5%</div>
+          <h3>Agri-led GDP growth.</h3>
+          <p>Nigeria's GDP growth is increasingly driven by agriculture and food value chains — a national priority.</p>
+          <span class="pill">Macro</span>
+        </div>
+        <div class="why-card">
+          <div class="n">53%</div>
+          <h3>Urban by 2035.</h3>
+          <p>More than half of Nigeria's population will live in cities — driving demand for organized food distribution.</p>
+          <span class="pill">Demographic</span>
+        </div>
+        <div class="why-card">
+          <div class="n">3×</div>
+          <h3>Online grocery growth.</h3>
+          <p>Forecast tripling of online grocery spend as smartphone use and digital payments mature in tier-1 cities.</p>
+          <span class="pill">Behavior</span>
+        </div>
+        <div class="why-card">
+          <div class="n">$4.8B</div>
+          <h3>African cold-chain by 2027.</h3>
+          <p>Cold-chain CapEx is becoming affordable as solar cold-rooms, reefer vans, and IoT sensors fall in cost.</p>
+          <span class="pill">Infrastructure</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>03 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       04 — SOLUTION
+  ====================================================================== -->
+  <section data-screen-label="04 Solution">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>The Solution · 04</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          One integrated<br/>
+          <span style="color:var(--green)">food infrastructure.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 03</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Cold-chain · commerce · software</div>
+        </div>
+      </div>
+
+      <div class="sol-grid">
+        <div class="sol-left">
+          <div class="sol-photo img-frame">
+            <div class="pattern amber"></div>
+            <span class="label-tag"><span class="dot"></span> Operation in motion</span>
+            <image-slot id="solution-photo" placeholder="Drop a photo" src="https://images.unsplash.com/photo-1565891741441-64926e441838?w=1400&q=80&auto=format&fit=crop"></image-slot>
+          </div>
+          <h3>An operating system for food distribution.</h3>
+          <p>Havesta integrates cold-chain logistics, smart warehousing, digital commerce, and supply-chain intelligence — the operating layer between agricultural supply and food demand.</p>
+
+          <div class="points">
+            <div>
+              <div class="k">For farmers</div>
+              <div class="v">Market access, fair pricing, no spoilage.</div>
+            </div>
+            <div>
+              <div class="k">For businesses</div>
+              <div class="v">Reliable supply with cold-chain quality.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="stack-row"><span class="lvl">L7</span><div class="nm">B2C Consumer App<span>Urban households · grocery delivery</span></div><span class="pill-sm">Demand</span></div>
+          <div class="stack-row"><span class="lvl">L6</span><div class="nm">B2B Procurement Portal<span>Restaurants · retailers · FMCG brands</span></div><span class="pill-sm">Demand</span></div>
+          <div class="stack-row hl"><span class="lvl">L5</span><div class="nm">Digital Marketplace<span>Transparent pricing · quality · payments</span></div><span class="pill-sm">Commerce</span></div>
+          <div class="stack-row hl"><span class="lvl">L4</span><div class="nm">Supply-Chain Intelligence<span>Forecasting · routing · matching</span></div><span class="pill-sm">Software</span></div>
+          <div class="stack-row"><span class="lvl">L3</span><div class="nm">Last-Mile Delivery<span>Cold-chain fleet · hyper-local fulfilment</span></div><span class="pill-sm">Fulfilment</span></div>
+          <div class="stack-row"><span class="lvl">L2</span><div class="nm">Smart Warehousing<span>Temp-controlled storage · IoT monitoring</span></div><span class="pill-sm">Hardware</span></div>
+          <div class="stack-row"><span class="lvl">L1</span><div class="nm">Farmer Network &amp; IoT Sensors<span>200M+ smallholders · cold-chain telemetry</span></div><span class="pill-sm">Supply</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>04 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       05 — HOW IT WORKS
+  ====================================================================== -->
+  <section data-screen-label="05 How It Works">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>How It Works · 05</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          From farm gate<br/>
+          <span style="color:var(--amber)">to final mile.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 04</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">The operating model</div>
+        </div>
+      </div>
+
+      <div class="flow-row">
+        <div class="flow-card">
+          <div class="ico">01</div>
+          <div class="step">Source</div>
+          <h4>Farmer onboarding</h4>
+          <p>Farmers register via mobile or agent-assisted onboarding, list produce, set pricing, and connect to our fulfilment network.</p>
+        </div>
+        <div class="flow-card">
+          <div class="ico">02</div>
+          <div class="step">Infrastructure</div>
+          <h4>Havesta operations</h4>
+          <p>Our logistics engine coordinates cold-chain pickup, warehousing, quality grading, smart packaging, and inventory across regional hubs.</p>
+        </div>
+        <div class="flow-card">
+          <div class="ico">03</div>
+          <div class="step">B2B fulfilment</div>
+          <h4>Bulk supply</h4>
+          <p>Restaurants, supermarkets, hotels, and FMCG brands place bulk orders — fulfilled via temperature-controlled fleet delivery.</p>
+        </div>
+        <div class="flow-card">
+          <div class="ico">04</div>
+          <div class="step">B2C delivery</div>
+          <h4>Consumer fresh</h4>
+          <p>Urban households order via the Havesta app and receive same-day or next-day delivery from verified cold-chain stock.</p>
+        </div>
+      </div>
+
+      <div class="flow-after">
+        <div><div class="k">Inputs</div><div class="v">Farmer supply · demand signals</div></div>
+        <div><div class="k">Assets</div><div class="v">Hubs · fleet · sensors · software</div></div>
+        <div><div class="k">Output</div><div class="v">Fresh food. On time. On margin.</div></div>
+        <div><div class="k">Flywheel</div><div class="v">Forecasting · routing · pricing</div></div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>05 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       06 — MARKET
+  ====================================================================== -->
+  <section data-screen-label="06 Market">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Market Opportunity · 06</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          A trillion-dollar<br/>
+          <span style="color:var(--green)">structural gap.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 05</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">TAM · SAM · SOM</div>
+        </div>
+      </div>
+
+      <div class="mkt-grid">
+        <div class="mkt-circles">
+          <svg viewBox="0 0 560 560">
+            <circle cx="280" cy="280" r="260" fill="#15402A"/>
+            <circle cx="280" cy="280" r="180" fill="#3D7A4C"/>
+            <circle cx="280" cy="280" r="90" fill="#D17A1F"/>
+
+            <text x="280" y="80" text-anchor="middle" fill="#C7BEA4" font-family="JetBrains Mono" font-size="14" letter-spacing="3" font-weight="600">TAM</text>
+            <text x="280" y="130" text-anchor="middle" fill="#F4EEDF" font-family="Bricolage Grotesque" font-weight="700" font-size="56" letter-spacing="-2">$1T+</text>
+
+            <text x="280" y="180" text-anchor="middle" fill="#C9DFCC" font-family="JetBrains Mono" font-size="13" letter-spacing="3" font-weight="600">SAM</text>
+            <text x="280" y="222" text-anchor="middle" fill="#F4EEDF" font-family="Bricolage Grotesque" font-weight="700" font-size="46" letter-spacing="-2">$150B</text>
+
+            <text x="280" y="278" text-anchor="middle" fill="#FBE2BB" font-family="JetBrains Mono" font-size="12" letter-spacing="3" font-weight="600">SOM</text>
+            <text x="280" y="320" text-anchor="middle" fill="#FFFFFF" font-family="Bricolage Grotesque" font-weight="700" font-size="40" letter-spacing="-2">$2.4B</text>
+          </svg>
+        </div>
+
+        <div class="mkt-right">
+          <h3>Africa's food market is one of the world's fastest growing.</h3>
+
+          <div class="mkt-card">
+            <div>
+              <div class="lbl">TAM</div>
+              <div class="amt green">$1T+</div>
+            </div>
+            <div class="d">Total African food market by 2030 — driven by population growth, urbanization, and middle-class consumption.</div>
+          </div>
+          <div class="mkt-card">
+            <div>
+              <div class="lbl">SAM</div>
+              <div class="amt leaf">$150B</div>
+            </div>
+            <div class="d">Nigeria's food retail &amp; distribution market — ~220M consumers, $50B+ grocery spend annually.</div>
+          </div>
+          <div class="mkt-card">
+            <div>
+              <div class="lbl">SOM</div>
+              <div class="amt amber">$2.4B</div>
+            </div>
+            <div class="d">Cold-chain &amp; digital food distribution across Lagos, Abuja, and Kano — Havesta's initial operational zones.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>06 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       07 — BUSINESS MODEL
+  ====================================================================== -->
+  <section data-screen-label="07 Business Model">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Business Model · 07</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Multiple<br/>
+          <span style="color:var(--amber)">revenue streams.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 06</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Five lines · one asset base</div>
+        </div>
+      </div>
+
+      <div class="rev-grid">
+        <div class="rev-card hl">
+          <div class="lbl">Per-order</div>
+          <h4>Delivery revenue</h4>
+          <p>B2B and B2C delivery of perishables &amp; grocery via our cold-chain fleet.</p>
+          <div class="num">35–45<span style="font-size:28px;">%</span></div>
+        </div>
+        <div class="rev-card hl">
+          <div class="lbl">Monthly SLA</div>
+          <h4>Storage &amp; warehousing</h4>
+          <p>Recurring cold-storage rental contracts with FMCG brands, processors, &amp; cooperatives.</p>
+          <div class="num">50–60<span style="font-size:28px;">%</span></div>
+        </div>
+        <div class="rev-card hl">
+          <div class="lbl">5–15% GMV</div>
+          <h4>Marketplace commission</h4>
+          <p>Take-rate on every transaction via the B2B procurement and B2C grocery marketplace.</p>
+          <div class="num">75–85<span style="font-size:28px;">%</span></div>
+        </div>
+        <div class="rev-card">
+          <div class="lbl">Retainer + volume</div>
+          <h4>B2B contracts</h4>
+          <p>Long-term supply agreements with hotels, hospitals, restaurant chains, and institutional buyers.</p>
+          <div class="num">40–55<span style="font-size:28px;">%</span></div>
+        </div>
+        <div class="rev-card">
+          <div class="lbl">Monthly recurring</div>
+          <h4>Subscription tiers</h4>
+          <p>Premium memberships for B2B (priority supply, analytics) and B2C (free delivery, discounts).</p>
+          <div class="num">80–90<span style="font-size:28px;">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>07 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       08 — GTM
+  ====================================================================== -->
+  <section data-screen-label="08 GTM">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Go-To-Market · 08</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Win Lagos.<br/>
+          Wire Nigeria.<br/>
+          <span style="color:var(--amber)">Move into Africa.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 07</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">A density-first playbook</div>
+        </div>
+      </div>
+
+      <div class="gtm-row">
+        <div class="gtm-card">
+          <span class="badge">Phase 01 · Lagos</span>
+          <h3>Validate the cold-chain corridor.</h3>
+          <div class="when">2026 · Pre-seed deployment</div>
+          <ul>
+            <li>Deploy first cold-chain pilot unit in Lagos</li>
+            <li>Onboard 20–50 farmers across producing states</li>
+            <li>Sign 5–10 anchor B2B clients (restaurants, retailers)</li>
+            <li>Launch consumer app private beta</li>
+            <li>Validate unit economics and reduce spoilage 40%+</li>
+          </ul>
+        </div>
+        <div class="gtm-card">
+          <span class="badge">Phase 02 · Nigeria</span>
+          <h3>Scale beyond Lagos. Prove the playbook.</h3>
+          <div class="when">2026–2027 · Seed round</div>
+          <ul>
+            <li>Expand to Abuja (and Kano if signal-strong)</li>
+            <li>Grow farmer network to 500+; B2B clients to 80+</li>
+            <li>Monthly GMV target $250K by Y2 EoY</li>
+            <li>Launch subscription tier and B2B procurement portal</li>
+            <li>Open marketplace API to third-party producers</li>
+          </ul>
+        </div>
+        <div class="gtm-card">
+          <span class="badge">Phase 03 · Continental</span>
+          <h3>Become the rail others run on.</h3>
+          <div class="when">2028+ · Series A</div>
+          <ul>
+            <li>Expand into Ghana, Kenya, and West Africa cities</li>
+            <li>5,000+ farmers · 500+ B2B clients · 4+ cities</li>
+            <li>Cold-chain-as-a-service for FMCG and pharma</li>
+            <li>Strategic partnerships with DFIs and processors</li>
+            <li>AfCFTA-aligned cross-border food logistics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>08 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       09 — COMPETITION
+  ====================================================================== -->
+  <section data-screen-label="09 Competition">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Competitive Landscape · 09</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Others own a layer.<br/>
+          <span style="color:var(--green)">We own the rail.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 08</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Defensibility matrix</div>
+        </div>
+      </div>
+
+      <div class="cmp">
+        <div class="row head">
+          <div class="cell nm">Player type</div>
+          <div class="cell">Cold-chain logistics</div>
+          <div class="cell">IoT monitoring</div>
+          <div class="cell">B2B + B2C model</div>
+          <div class="cell">Smart warehousing</div>
+          <div class="cell">Digital marketplace</div>
+          <div class="cell">Farmer onboarding</div>
+        </div>
+        <div class="row us">
+          <div class="cell nm">Havesta</div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+        </div>
+        <div class="row">
+          <div class="cell nm">Traditional distributors</div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+        </div>
+        <div class="row">
+          <div class="cell nm">Local delivery apps</div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+        </div>
+        <div class="row">
+          <div class="cell nm">Agri marketplaces</div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+        </div>
+        <div class="row">
+          <div class="cell nm">Cold-storage providers</div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="ck"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+          <div class="cell"><span class="dh"></span></div>
+        </div>
+      </div>
+
+      <div class="moat-band">
+        <div class="lbl">Three moats<br/>compounding</div>
+        <div class="v">Cold-chain scarcity (high CapEx barrier). Network effects (more farmers → more buyers → more farmers). Data intelligence (every transaction trains demand forecasting and route optimization).</div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>09 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       10 — TRACTION
+  ====================================================================== -->
+  <section data-screen-label="10 Roadmap">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Roadmap · 10</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Building toward<br/>
+          <span style="color:var(--green)">continental scale.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 09</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Stage · milestones · projections</div>
+        </div>
+      </div>
+
+      <div class="trac-grid">
+        <div class="trac-stats">
+          <div class="trac-stat hl">
+            <div class="n">5,000<span style="font-size:60px;">+</span></div>
+            <div class="l">Farmers onboarded by Year 3 (from 20–50 in Year 1).</div>
+            <div class="tag">Supply network</div>
+          </div>
+          <div class="trac-stat">
+            <div class="n">500<span style="font-size:60px;">+</span></div>
+            <div class="l">B2B clients by Year 3 (from 5–10 in Year 1).</div>
+            <div class="tag">Revenue</div>
+          </div>
+          <div class="trac-stat">
+            <div class="n">$2M</div>
+            <div class="l">Monthly GMV target by Year 3 EoY across multiple cities.</div>
+            <div class="tag">Throughput</div>
+          </div>
+          <div class="trac-stat hl">
+            <div class="n">4<span style="font-size:60px;">+</span></div>
+            <div class="l">Cities operational by Year 3 — Nigeria, then Pan-African.</div>
+            <div class="tag">Geography</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column;">
+          <div class="eyebrow" style="margin-bottom:14px;">Milestone trail</div>
+          <div class="ms-list">
+            <div class="ms"><div class="d">Q3 · 2024 ✓</div><div class="t"><b>Concept &amp; validation</b> — business model validated, founding team formed, farmer + B2B interviews.</div></div>
+            <div class="ms"><div class="d">Q1 · 2025 ✓</div><div class="t"><b>MVP built</b> — core marketplace and logistics platform; first pilot conversations in Lagos.</div></div>
+            <div class="ms"><div class="d">Q2 · 2026</div><div class="t"><b>Pre-seed close ($50K)</b> — deploy cold-chain pilot unit; onboard first 20 farmers; sign 5 B2B clients.</div></div>
+            <div class="ms"><div class="d">Q4 · 2026</div><div class="t"><b>Lagos pilot live</b> — cold-chain delivery, marketplace transactions, B2B supply contracts activated.</div></div>
+            <div class="ms"><div class="d">Q3 · 2027</div><div class="t"><b>Seed round ($500K)</b> — expand to Abuja; 500+ farmers; 80+ B2B clients on proven unit economics.</div></div>
+            <div class="ms"><div class="d">2028+</div><div class="t"><b>Series A · Pan-Africa</b> — expand into Ghana, Kenya, additional Nigerian cities.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>* Projections are management estimates · data room available</div>
+      <div>10 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       11 — TEAM
+  ====================================================================== -->
+  <section data-screen-label="11 Team">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Team · 11</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          The operators<br/>
+          <span style="color:var(--amber)">building the rail.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 10</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">Founding team</div>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        <div class="person">
+          <div class="avatar">
+            <span class="ph-tag">FOUNDER &amp; CEO</span>
+            <span class="init">NA</span>
+          </div>
+          <div class="role">FOUNDER &amp; CEO</div>
+          <h4>Noel Amobeda</h4>
+          <p>Leading Technology Operations accross Multi-National Technology firm. 5+ years industry experience.</p>
+        </div>
+        <div class="person">
+          <div class="avatar">
+            <span class="ph-tag">CTO · ENGINEERING</span>
+            <span class="init">CA</span>
+          </div>
+          <div class="role">CTO · ENGINEERING</div>
+          <h4>Charles Amobeda</h4>
+          <p>Senior Engineer  Building marketplace and payments infrastructure at scale. BSc Computer Science, MSc Cybersecurity. Full-stack and systems architecture.</p>
+        </div>
+        <div class="person">
+          <div class="avatar">
+            <span class="ph-tag">CHIEF MARKETING OFFICER</span>
+            <span class="init">AO</span>
+          </div>
+          <div class="role">CHIEF MARKETING OFFICER</div>
+          <h4>Adetayo Onilogbo</h4>
+          <p>Brand strategist with experience across international brands. Builds category-defining go-to-market strategies for tech startups.</p>
+        </div>
+        <div class="person">
+          <div class="avatar">
+            <span class="ph-tag">GROWTH &amp; OPERATIONS SPECIALIST</span>
+            <span class="init">GO</span>
+          </div>
+          <div class="role">GROWTH &amp; OPERATIONS SPECIALIST</div>
+          <h4>Gabriel Oriakhi</h4>
+          <p>Built merchant networks for two leading Nigerian fintech startups. Specialist in B2B sales, partnership development, and market expansion across Nigeria.</p>
+        </div>
+      </div>
+
+      <div class="advisor-band">
+        <div class="k">Strategic advisors</div>
+        <div class="v"><b>Dr. Fatima Bello</b> — AgriTech Policy, former Director at NAFDAC. <b>James Kariuki</b> — Logistics Infrastructure, ex-VP DHL Africa. <b>Ngozi Adichie-Obi</b> — Partner, TLCom Capital (African VC networks).</div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited</div>
+      <div>11 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       12 — FINANCIALS
+  ====================================================================== -->
+  <section data-screen-label="12 Financials">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>Financial Projections · 12</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Disciplined growth.<br/>
+          <span style="color:var(--green)">Asset-backed.</span>
+        </h2>
+        <div class="right">
+          <div class="eyebrow">Section 11</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:var(--ink-2);">3-year illustrative plan</div>
+        </div>
+      </div>
+
+      <div class="fin-grid">
+        <div class="fin-chart">
+          <div class="chart-area">
+            <svg viewBox="0 0 700 480" preserveAspectRatio="none">
+              <g stroke="#0F141022" stroke-width="1">
+                <line x1="40" y1="430" x2="700" y2="430"/>
+                <line x1="40" y1="330" x2="700" y2="330" stroke-dasharray="3 5"/>
+                <line x1="40" y1="230" x2="700" y2="230" stroke-dasharray="3 5"/>
+                <line x1="40" y1="130" x2="700" y2="130" stroke-dasharray="3 5"/>
+                <line x1="40" y1="30" x2="700" y2="30" stroke-dasharray="3 5"/>
+              </g>
+              <g font-family="JetBrains Mono" font-size="12" fill="#6E6A5C" letter-spacing="1">
+                <text x="0" y="434">$0</text>
+                <text x="0" y="334">$2M</text>
+                <text x="0" y="234">$4M</text>
+                <text x="0" y="134">$6M</text>
+                <text x="0" y="34">$8M</text>
+              </g>
+
+              <!-- Y1: $50K rev (3px sliver), GP $14K (invisible — just a band) -->
+              <g>
+                <rect x="120" y="422" width="100" height="8" rx="4" fill="#15402A"/>
+                <text x="170" y="410" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="700" font-size="28" fill="#0F1410" letter-spacing="-1">$50K</text>
+                <text x="170" y="388" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#D17A1F" letter-spacing="1">28% GM</text>
+              </g>
+              <!-- Y2: $600K rev = 30px; GP $228K = 11px -->
+              <g>
+                <rect x="320" y="400" width="100" height="30" rx="6" fill="#15402A"/>
+                <rect x="335" y="419" width="70" height="11" rx="4" fill="#D17A1F"/>
+                <text x="370" y="388" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="700" font-size="28" fill="#0F1410" letter-spacing="-1">$600K</text>
+                <text x="370" y="366" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#D17A1F" letter-spacing="1">38% GM</text>
+              </g>
+              <!-- Y3: $8M rev = 400px; GP $4M = 200px -->
+              <g>
+                <rect x="520" y="30" width="100" height="400" rx="8" fill="#15402A"/>
+                <rect x="535" y="230" width="70" height="200" rx="6" fill="#D17A1F"/>
+                <text x="570" y="18" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="700" font-size="36" fill="#0F1410" letter-spacing="-1">$8M</text>
+              </g>
+            </svg>
+          </div>
+          <div class="x-labels"><span>Y1 · 2026</span><span>Y2 · 2027</span><span>Y3 · 2028</span></div>
+          <div class="chart-legend">
+            <div class="l"><span class="sw" style="background:#15402A;"></span> Annual Revenue</div>
+            <div class="l"><span class="sw" style="background:#D17A1F;"></span> Gross Profit</div>
+            <div class="l" style="margin-left:auto; color:var(--muted);">Illustrative · USD</div>
+          </div>
+        </div>
+
+        <div class="fin-side">
+          <h3>From pilot to platform.</h3>
+          <div class="fin-row"><div class="k">Annual revenue (Y1 → Y3)</div><div class="v">$50K → $8M</div></div>
+          <div class="fin-row"><div class="k">Monthly GMV EoY (Y3)</div><div class="v">$2M</div></div>
+          <div class="fin-row"><div class="k">Farmers (Y3)</div><div class="v">5,000+</div></div>
+          <div class="fin-row"><div class="k">B2B clients (Y3)</div><div class="v">500+</div></div>
+          <div class="fin-row"><div class="k">Cities operational (Y3)</div><div class="v">4+</div></div>
+          <div class="fin-row"><div class="k">Gross margin (Y3)</div><div class="v">50%</div></div>
+          <div class="fin-row"><div class="k">EBITDA (Y3)</div><div class="v">$1.2M</div></div>
+          <div class="fin-row"><div class="k">EBITDA breakeven</div><div class="v">Year 3</div></div>
+          <div class="fin-note">Conservative projections · management estimates. Assumes pre-seed close Q2 2026 and seed close Q3 2027. Full model in the data room.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited · Illustrative</div>
+      <div>12 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       13 — THE ASK
+  ====================================================================== -->
+  <section data-screen-label="13 The Ask" class="s-ask dark">
+    <div class="cover-grad"></div>
+
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>The Ask · 13</div>
+    </div>
+
+    <div class="frame">
+      <div class="head-row">
+        <h2 class="slide-title">
+          Raising <em>$50K</em><br/>
+          to validate Lagos.
+        </h2>
+        <div class="right">
+          <div class="eyebrow" style="color:#C7BEA4;">Section 12</div>
+          <div class="mono" style="font-size:14px; margin-top:8px; color:#C7BEA4;">Pre-seed · SAFE (Post-Money)</div>
+        </div>
+      </div>
+
+      <div class="ask-grid">
+        <div class="ask-left">
+          <div class="ask-num">
+            <span class="currency">$</span><span>50</span><span class="k">K</span>
+          </div>
+          <div class="ask-sub">
+            Pre-seed sized for ~10 months of runway — enough to deploy the first cold-chain pilot unit, complete the platform MVP, and onboard the first farmers and B2B clients in Lagos.
+          </div>
+
+          <div class="ask-terms">
+            <div><div class="k">Instrument</div><div class="v">SAFE (Post-Money)</div></div>
+            <div><div class="k">Valuation cap</div><div class="v">$1.5M</div></div>
+            <div><div class="k">Discount</div><div class="v">20%</div></div>
+            <div><div class="k">Runway · Next round</div><div class="v">~12 mo · Seed Q4 '27</div></div>
+          </div>
+        </div>
+
+        <div class="uof">
+          <div class="uof-title">Use of funds</div>
+          <div class="uof-row"><span class="nm">Cold-chain pilot infrastructure</span><span class="bar"><i style="width:40%"></i></span><span class="pct">40%</span></div>
+          <div class="uof-row"><span class="nm">Technology &amp; product</span><span class="bar"><i style="width:25%"></i></span><span class="pct">25%</span></div>
+          <div class="uof-row"><span class="nm">Team &amp; operations</span><span class="bar"><i style="width:20%"></i></span><span class="pct">20%</span></div>
+          <div class="uof-row"><span class="nm">Sales &amp; market testing</span><span class="bar"><i style="width:15%"></i></span><span class="pct">15%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited · Confidential</div>
+      <div>13 / 14</div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       14 — CLOSING
+  ====================================================================== -->
+  <section data-screen-label="14 Closing" class="s-close">
+    <div class="chrome-top">
+      <div class="wordmark"><span class="logo"></span><span class="name">Havesta</span></div>
+      <div>The Pitch · 14</div>
+    </div>
+
+    <div class="frame">
+      <div class="close-top">
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:32px;">
+          <div class="eyebrow">Pre-seed open · $50K</div>
+          <h1 class="close-headline">
+            The infrastructure<br/>
+            <span class="green">Africa</span> has been<br/>
+            <span class="amber">waiting for</span>.
+          </h1>
+        </div>
+        <div class="close-photo img-frame">
+          <div class="pattern"></div>
+          <span class="label-tag"><span class="dot"></span> Vision shot</span>
+          <image-slot id="closing-photo" placeholder="Drop a hero photo" src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=1600&q=80&auto=format&fit=crop"></image-slot>
+        </div>
+      </div>
+
+      <div class="close-grid">
+        <div class="close-cols">
+          <div class="close-blurb">
+            <h4>The pitch in one breath</h4>
+            <p>Havesta is not building another food delivery app. We're building the cold-chain backbone that moves Africa's agricultural economy from fragmented and wasteful to integrated and intelligent.</p>
+          </div>
+          <div class="close-blurb">
+            <h4>Why partner now</h4>
+            <p>$50K pre-seed at a $1.5M cap with 20% discount. Early investors take meaningful ownership in a category-defining African infrastructure company — before the seed round.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="row">
+            <div class="k">Contact</div>
+            <div class="v">hello@havesta.com</div>
+          </div>
+          <div class="row">
+            <div class="k">Website</div>
+            <div class="v">havesta.com</div>
+          </div>
+          <a class="cta-btn" href="mailto:urutechenterprise@gmail.com">Request the data room <span class="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <div>Havesta Logistics Limited · Confidential</div>
+      <div>14 / 14</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>
