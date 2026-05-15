@@ -996,7 +996,7 @@ function ExportImportPanel() {
     const bundle = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key.startsWith('havesta_content_') || key === 'havesta_logo') {
+      if (key.startsWith('havesta_content_') || key === 'havesta_logo' || key === 'havesta_github_token') {
         bundle[key] = localStorage.getItem(key);
       }
     }
@@ -1020,8 +1020,10 @@ function ExportImportPanel() {
         const bundle = JSON.parse(ev.target.result);
         let count = 0;
         for (const [key, value] of Object.entries(bundle)) {
-          if (key.startsWith('havesta_content_') || key === 'havesta_logo') {
-            localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
+          if (key.startsWith('havesta_content_') || key === 'havesta_logo' || key === 'havesta_github_token') {
+            const val = typeof value === 'string' ? value : JSON.stringify(value);
+            localStorage.setItem(key, val);
+            if (key === 'havesta_github_token') setToken(value);
             count++;
           }
         }
@@ -1035,6 +1037,12 @@ function ExportImportPanel() {
       e.target.value = '';
     };
     reader.readAsText(file);
+  };
+
+  // Auto-save token to localStorage on every change so it persists on re-render
+  const handleTokenChange = (val) => {
+    setToken(val);
+    if (val.trim()) localStorage.setItem('havesta_github_token', val.trim());
   };
 
   const saveToken = () => {
@@ -1110,7 +1118,7 @@ function ExportImportPanel() {
             <input
               type={showToken ? 'text' : 'password'}
               value={token}
-              onChange={e => setToken(e.target.value)}
+              onChange={e => handleTokenChange(e.target.value)}
               placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
               className="flex-1 bg-gray-900 border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-mono focus:outline-none focus:border-emerald-500/40 transition-colors"
             />
