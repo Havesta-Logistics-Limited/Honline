@@ -2,32 +2,30 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { PieChart, TrendingUp, Info } from 'lucide-react';
+import { useContent } from '../hooks/useContent';
 
-const rounds = [
-  {
-    id: 'pre-seed',
-    label: 'Pre-Investment (Now)',
-    valuation: '$1.5M',
-    raised: '—',
-    note: '',
-    holders: [
-      { name: 'Adewale Okonkwo (CEO)', role: 'Founder & Sole Shareholder', shares: 10_000_000, pct: 100.0, type: 'Common', color: 'bg-emerald-500' },
-    ],
-    total: 10_000_000,
-  },
-  {
-    id: 'seed',
-    label: 'Post-Pre-Seed SAFE ($50K)',
-    valuation: '$1.5M cap',
-    raised: '$50,000',
-    note: 'SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors.',
-    holders: [
-      { name: 'Adewale Okonkwo (CEO)', role: 'Founder', shares: 10_000_000, pct: 96.8, type: 'Common', color: 'bg-emerald-500' },
-      { name: 'Pre-Seed Investors (SAFE)', role: 'Angel / Early Backers', shares: 333_333, pct: 3.2, type: 'Preferred', color: 'bg-blue-500' },
-    ],
-    total: 10_333_333,
-  },
-];
+const ROUND_HOLDERS = {
+  'pre-seed': [
+    { name: 'Adewale Okonkwo (CEO)', role: 'Founder & Sole Shareholder', shares: 10_000_000, pct: 100.0, type: 'Common', color: 'bg-emerald-500' },
+  ],
+  'seed': [
+    { name: 'Adewale Okonkwo (CEO)', role: 'Founder', shares: 10_000_000, pct: 96.8, type: 'Common', color: 'bg-emerald-500' },
+    { name: 'Pre-Seed Investors (SAFE)', role: 'Angel / Early Backers', shares: 333_333, pct: 3.2, type: 'Preferred', color: 'bg-blue-500' },
+  ],
+};
+
+const ROUND_TOTALS = { 'pre-seed': 10_000_000, 'seed': 10_333_333 };
+
+const DEFAULTS = {
+  badge: 'Cap Table',
+  headlineLine1: 'Equity & Ownership',
+  headlineLine2: 'Projections',
+  subheadline: 'Projected cap table across funding stages — currently 100% founder-owned, showing how investor allocation grows from pre-seed SAFE through a projected seed round.',
+  rounds: [
+    { id: 'pre-seed', label: 'Pre-Investment (Now)', valuation: '$1.5M', raised: '—', note: '' },
+    { id: 'seed', label: 'Post-Pre-Seed SAFE ($50K)', valuation: '$1.5M cap', raised: '$50,000', note: 'SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors.' },
+  ],
+};
 
 function PieVisual({ holders }) {
   let cumulative = 0;
@@ -76,11 +74,18 @@ function PieVisual({ holders }) {
 }
 
 export default function CapTable() {
+  const c = useContent('capTable', DEFAULTS);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const [activeRound, setActiveRound] = useState('pre-seed');
 
-  const round = rounds.find(r => r.id === activeRound);
+  const rounds = c.rounds.map(r => ({
+    ...r,
+    holders: ROUND_HOLDERS[r.id] || [],
+    total: ROUND_TOTALS[r.id] || 0,
+  }));
+
+  const round = rounds.find(r => r.id === activeRound) || rounds[0];
 
   return (
     <section id="cap-table" className="relative py-16 md:py-28 px-4 md:px-6 bg-gradient-to-b from-gray-950 to-gray-900/20">
@@ -93,15 +98,15 @@ export default function CapTable() {
           className="text-center mb-16"
         >
           <span className="inline-block text-xs font-semibold text-emerald-400 tracking-widest uppercase mb-4 glass px-3 py-1.5 rounded-full border border-emerald-500/20">
-            Cap Table
+            {c.badge}
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight mb-5">
-            Equity & Ownership
+            {c.headlineLine1}
             <br />
-            <span className="text-gradient">Projections</span>
+            <span className="text-gradient">{c.headlineLine2}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Projected cap table across funding stages — currently 100% founder-owned, showing how investor allocation grows from pre-seed SAFE through a projected seed round.
+            {c.subheadline}
           </p>
         </motion.div>
 

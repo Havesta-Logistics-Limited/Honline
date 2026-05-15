@@ -2,6 +2,27 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FileText, ChevronDown, ChevronUp, Info, Download, Shield } from 'lucide-react';
+import { useContent } from '../hooks/useContent';
+
+const DEFAULTS = {
+  badge: 'Legal Documents',
+  headlineLine1: 'SAFE Agreement',
+  headlineLine2: 'Template',
+  subheadline: 'Our standard Simple Agreement for Future Equity — modelled on the Y Combinator SAFE framework, adapted for Nigerian law. Investors may execute a customised version at their preferred terms.',
+  standardTerms: [
+    { k: 'Instrument', v: 'SAFE (Post-Money)' },
+    { k: 'Round', v: 'Pre-Seed' },
+    { k: 'Raise Target', v: '$50,000' },
+    { k: 'Valuation Cap', v: '$1,500,000' },
+    { k: 'Discount Rate', v: '20%' },
+    { k: 'Min. Ticket', v: '$5,000' },
+    { k: 'Pro-Rata Rights', v: 'Included' },
+    { k: 'MFN Clause', v: 'Included' },
+    { k: 'Interest', v: 'None' },
+    { k: 'Maturity Date', v: 'None' },
+    { k: 'Governing Law', v: 'Nigeria' },
+  ],
+};
 
 const safeDate = 'effective upon countersignature';
 
@@ -148,6 +169,7 @@ function Clause({ section, index }) {
 }
 
 export default function SAFEAgreement() {
+  const c = useContent('safeAgreement', DEFAULTS);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -162,15 +184,15 @@ export default function SAFEAgreement() {
           className="text-center mb-16"
         >
           <span className="inline-block text-xs font-semibold text-emerald-400 tracking-widest uppercase mb-4 glass px-3 py-1.5 rounded-full border border-emerald-500/20">
-            Legal Documents
+            {c.badge}
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight mb-5">
-            SAFE Agreement
+            {c.headlineLine1}
             <br />
-            <span className="text-gradient">Template</span>
+            <span className="text-gradient">{c.headlineLine2}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Our standard Simple Agreement for Future Equity — modelled on the Y Combinator SAFE framework, adapted for Nigerian law. Investors may execute a customised version at their preferred terms.
+            {c.subheadline}
           </p>
         </motion.div>
 
@@ -189,19 +211,7 @@ export default function SAFEAgreement() {
                 <span className="text-white font-semibold text-sm">Standard Terms</span>
               </div>
               <div className="space-y-3">
-                {[
-                  ['Instrument', 'SAFE (Post-Money)'],
-                  ['Round', 'Pre-Seed'],
-                  ['Raise Target', '$50,000'],
-                  ['Valuation Cap', '$1,500,000'],
-                  ['Discount Rate', '20%'],
-                  ['Min. Ticket', '$5,000'],
-                  ['Pro-Rata Rights', 'Included'],
-                  ['MFN Clause', 'Included'],
-                  ['Interest', 'None'],
-                  ['Maturity Date', 'None'],
-                  ['Governing Law', 'Nigeria'],
-                ].map(([k, v]) => (
+                {c.standardTerms.map(({ k, v }) => (
                   <div key={k} className="flex justify-between border-b border-white/[0.05] pb-2">
                     <span className="text-gray-500 text-xs">{k}</span>
                     <span className="text-white text-xs font-semibold">{v}</span>

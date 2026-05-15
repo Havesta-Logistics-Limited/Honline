@@ -245,6 +245,16 @@ const SECTION_DEFAULTS = {
       { k: 'Governing Law', v: 'Nigeria' },
     ],
   },
+  capTable: {
+    badge: 'Cap Table',
+    headlineLine1: 'Equity & Ownership',
+    headlineLine2: 'Projections',
+    subheadline: 'Projected cap table across funding stages — currently 100% founder-owned, showing how investor allocation grows from pre-seed SAFE through a projected seed round.',
+    rounds: [
+      { id: 'pre-seed', label: 'Pre-Investment (Now)', valuation: '$1.5M', raised: '—', note: '' },
+      { id: 'seed', label: 'Post-Pre-Seed SAFE ($50K)', valuation: '$1.5M cap', raised: '$50,000', note: 'SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors.' },
+    ],
+  },
   finalCTA: {
     badge: 'Pre-Seed Round Open · $50,000',
     headlineLine1: 'The Infrastructure',
@@ -289,6 +299,7 @@ const SECTIONS = [
   { key: 'investment', label: 'Investment' },
   { key: 'executiveSummary', label: 'Executive Summary' },
   { key: 'safeAgreement', label: 'SAFE Agreement' },
+  { key: 'capTable', label: 'Cap Table' },
   { key: 'finalCTA', label: 'Final CTA' },
   { key: 'footer', label: 'Footer' },
   { key: 'emailGate', label: 'Email Gate' },
@@ -482,6 +493,18 @@ const SECTION_SCHEMA = {
       { key: 'k', label: 'Term', type: 'text' },
       { key: 'v', label: 'Value', type: 'text' },
     ], defaultItem: { k: '', v: '' } },
+  ],
+  capTable: [
+    { key: 'badge', label: 'Badge Text', type: 'text' },
+    { key: 'headlineLine1', label: 'Headline — Line 1', type: 'text' },
+    { key: 'headlineLine2', label: 'Headline — Line 2 (gradient)', type: 'text' },
+    { key: 'subheadline', label: 'Subheadline', type: 'textarea' },
+    { key: 'rounds', label: 'Funding Rounds', type: 'array<object>', itemFields: [
+      { key: 'label', label: 'Round Label', type: 'text' },
+      { key: 'valuation', label: 'Valuation', type: 'text' },
+      { key: 'raised', label: 'Amount Raised', type: 'text' },
+      { key: 'note', label: 'Note / Conversion Explanation', type: 'textarea' },
+    ], defaultItem: { id: 'new-round', label: '', valuation: '', raised: '', note: '' } },
   ],
   finalCTA: [
     { key: 'badge', label: 'Badge Text', type: 'text' },
