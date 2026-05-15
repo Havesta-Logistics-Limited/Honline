@@ -6,12 +6,12 @@ import { useContent, fetchContentJson } from '../hooks/useContent';
 const DEFAULTS = {
   siteLabel: 'Investor Portal · Confidential',
   accessBadge: 'Access Required',
-  headline: 'Enter your email to access the Havesta investor deck.',
-  description: 'This site is intended for investors and partners. Enter your email below — we may follow up with updates.',
+  headline: 'Enter a valid email to access the Investor Portal',
+  description: 'This site is intended for investors and partners. Please enter your email below.',
   placeholder: 'your@email.com',
-  buttonLabel: 'Access the Investor Site',
-  disclaimer: 'By continuing you confirm you are an accredited investor or authorised recipient. Your email will not be shared with third parties.',
-  footerNote: '© 2025 Havesta Logistics Limited · Lagos, Nigeria · CAC Registered',
+  buttonLabel: 'Access the Investor Portal',
+  disclaimer: 'By continuing you confirm you are an authorized recipient. Your email will not be shared with third parties.',
+  footerNote: '© 2026 Havesta Logistics Limited · Lagos, Nigeria · CAC Registered',
 };
 
 function LogoMark() {
