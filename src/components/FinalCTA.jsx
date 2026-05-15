@@ -31,7 +31,7 @@ export default function FinalCTA() {
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 text-sm text-emerald-400 border border-emerald-500/20">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 glass px-4 py-2 rounded-full mb-8 text-xs sm:text-sm text-emerald-400 border border-emerald-500/20">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             {c.badge}
           </div>

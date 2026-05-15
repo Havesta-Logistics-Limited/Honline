@@ -175,12 +175,12 @@ export default function SAFEAgreement() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Term summary sidebar */}
+          {/* Term summary sidebar — shows below document on mobile, left on desktop */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="space-y-4"
+            className="space-y-4 order-2 lg:order-1"
           >
             {/* Key terms card */}
             <div className="glass-card rounded-2xl border border-emerald-500/15 p-6 bg-gradient-to-br from-emerald-950/20 to-transparent">
@@ -246,7 +246,7 @@ export default function SAFEAgreement() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="lg:col-span-2 space-y-3"
+            className="lg:col-span-2 space-y-3 order-1 lg:order-2"
           >
             {/* Document header */}
             <div className="glass-card rounded-2xl border border-white/[0.07] p-6 mb-5">

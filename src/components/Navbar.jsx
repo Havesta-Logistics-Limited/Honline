@@ -92,7 +92,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-white/[0.06] px-6 pb-4"
+            className="md:hidden bg-gray-950 border-t border-white/[0.10] px-4 pb-4"
           >
             {c.navLinks.map((l) => (
               <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-3 text-gray-400 hover:text-white text-sm border-b border-white/[0.04]">

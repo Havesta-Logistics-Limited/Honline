@@ -134,15 +134,15 @@ export default function CapTable() {
           transition={{ duration: 0.5 }}
         >
           {/* Round meta */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-3 gap-2 md:gap-4 mb-8">
             {[
               { label: 'Valuation', value: round.valuation },
               { label: 'Round Size', value: round.raised },
               { label: 'Total Shares (FD)', value: round.total.toLocaleString() },
             ].map(m => (
-              <div key={m.label} className="glass-card rounded-xl p-4 border border-white/[0.07] text-center">
-                <div className="text-gray-600 text-[10px] uppercase tracking-wider mb-1">{m.label}</div>
-                <div className="text-white font-black text-xl">{m.value}</div>
+              <div key={m.label} className="glass-card rounded-xl p-3 md:p-4 border border-white/[0.07] text-center">
+                <div className="text-gray-600 text-[9px] md:text-[10px] uppercase tracking-wider mb-1">{m.label}</div>
+                <div className="text-white font-black text-sm md:text-xl break-all">{m.value}</div>
               </div>
             ))}
           </div>
