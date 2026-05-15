@@ -64,14 +64,14 @@ export default function Hero() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-emerald-900/20 blur-[120px] pointer-events-none" />
       <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] rounded-full bg-emerald-800/10 blur-[100px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 text-sm text-emerald-400 border border-emerald-500/20"
+          className="inline-flex flex-wrap items-center justify-center gap-2 glass px-3 py-2 rounded-full mb-8 text-xs sm:text-sm text-emerald-400 border border-emerald-500/20"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
           {c.badge}
         </motion.div>
 
@@ -79,7 +79,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.8 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] md:leading-[0.95] mb-6"
         >
           <span className="text-white">{c.headlineLine1}</span>
           <br />

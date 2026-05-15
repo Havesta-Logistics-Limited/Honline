@@ -31,7 +31,7 @@ function LogoMark() {
     return () => window.removeEventListener('havesta:logo', handler);
   }, []);
   if (logo) {
-    return <img src={logo} alt="Logo" className="w-10 h-10 md:w-24 md:h-24 object-contain rounded-xl md:rounded-2xl" />;
+    return <img src={logo} alt="Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain rounded-lg" />;
   }
   return null;
 }
@@ -56,7 +56,7 @@ export default function Navbar() {
         scrolled ? 'glass border-b border-white/[0.06] py-3' : 'py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
           <LogoMark />
           <span className="text-white font-black text-2xl tracking-tight">
