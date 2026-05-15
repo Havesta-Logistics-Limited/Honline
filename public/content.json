@@ -218,6 +218,31 @@
         "raised": "$50,000",
         "note": "SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors."
       }
+    ],
+    "preSeedHolders": [
+      {
+        "name": "Noel Amobeda (CEO)",
+        "role": "Founder & Sole Shareholder",
+        "shares": 10000000,
+        "pct": 100,
+        "type": "Common"
+      }
+    ],
+    "seedHolders": [
+      {
+        "name": "Noel Amobeda (CEO)",
+        "role": "Founder",
+        "shares": 10000000,
+        "pct": 96.8,
+        "type": "Common"
+      },
+      {
+        "name": "Pre-Seed Investors (SAFE)",
+        "role": "Angel / Early Backers",
+        "shares": 333333,
+        "pct": 3.2,
+        "type": "Preferred"
+      }
     ]
   },
   "havesta_content_executiveSummary": {
