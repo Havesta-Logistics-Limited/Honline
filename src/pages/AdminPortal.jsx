@@ -254,6 +254,13 @@ const SECTION_DEFAULTS = {
       { id: 'pre-seed', label: 'Pre-Investment (Now)', valuation: '$1.5M', raised: '—', note: '' },
       { id: 'seed', label: 'Post-Pre-Seed SAFE ($50K)', valuation: '$1.5M cap', raised: '$50,000', note: 'SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors.' },
     ],
+    preSeedHolders: [
+      { name: 'Adewale Okonkwo (CEO)', role: 'Founder & Sole Shareholder', shares: 10000000, pct: 100.0, type: 'Common' },
+    ],
+    seedHolders: [
+      { name: 'Adewale Okonkwo (CEO)', role: 'Founder', shares: 10000000, pct: 96.8, type: 'Common' },
+      { name: 'Pre-Seed Investors (SAFE)', role: 'Angel / Early Backers', shares: 333333, pct: 3.2, type: 'Preferred' },
+    ],
   },
   finalCTA: {
     badge: 'Pre-Seed Round Open · $50,000',
@@ -505,6 +512,20 @@ const SECTION_SCHEMA = {
       { key: 'raised', label: 'Amount Raised', type: 'text' },
       { key: 'note', label: 'Note / Conversion Explanation', type: 'textarea' },
     ], defaultItem: { id: 'new-round', label: '', valuation: '', raised: '', note: '' } },
+    { key: 'preSeedHolders', label: 'Pre-Investment Holders', type: 'array<object>', itemFields: [
+      { key: 'name', label: 'Name', type: 'text' },
+      { key: 'role', label: 'Role / Title', type: 'text' },
+      { key: 'shares', label: 'Number of Shares', type: 'text' },
+      { key: 'pct', label: 'Ownership %', type: 'text' },
+      { key: 'type', label: 'Share Type (Common / Preferred)', type: 'text' },
+    ], defaultItem: { name: '', role: '', shares: 0, pct: 0, type: 'Common' } },
+    { key: 'seedHolders', label: 'Post-Pre-Seed SAFE Holders', type: 'array<object>', itemFields: [
+      { key: 'name', label: 'Name', type: 'text' },
+      { key: 'role', label: 'Role / Title', type: 'text' },
+      { key: 'shares', label: 'Number of Shares', type: 'text' },
+      { key: 'pct', label: 'Ownership %', type: 'text' },
+      { key: 'type', label: 'Share Type (Common / Preferred)', type: 'text' },
+    ], defaultItem: { name: '', role: '', shares: 0, pct: 0, type: 'Common' } },
   ],
   finalCTA: [
     { key: 'badge', label: 'Badge Text', type: 'text' },

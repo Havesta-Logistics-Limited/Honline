@@ -4,17 +4,7 @@ import { useRef, useState } from 'react';
 import { PieChart, TrendingUp, Info } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 
-const ROUND_HOLDERS = {
-  'pre-seed': [
-    { name: 'Adewale Okonkwo (CEO)', role: 'Founder & Sole Shareholder', shares: 10_000_000, pct: 100.0, type: 'Common', color: 'bg-emerald-500' },
-  ],
-  'seed': [
-    { name: 'Adewale Okonkwo (CEO)', role: 'Founder', shares: 10_000_000, pct: 96.8, type: 'Common', color: 'bg-emerald-500' },
-    { name: 'Pre-Seed Investors (SAFE)', role: 'Angel / Early Backers', shares: 333_333, pct: 3.2, type: 'Preferred', color: 'bg-blue-500' },
-  ],
-};
-
-const ROUND_TOTALS = { 'pre-seed': 10_000_000, 'seed': 10_333_333 };
+const HOLDER_COLORS = ['bg-emerald-500', 'bg-blue-500', 'bg-teal-500', 'bg-purple-500', 'bg-cyan-500'];
 
 const DEFAULTS = {
   badge: 'Cap Table',
@@ -24,6 +14,13 @@ const DEFAULTS = {
   rounds: [
     { id: 'pre-seed', label: 'Pre-Investment (Now)', valuation: '$1.5M', raised: '—', note: '' },
     { id: 'seed', label: 'Post-Pre-Seed SAFE ($50K)', valuation: '$1.5M cap', raised: '$50,000', note: 'SAFE converts at $1.5M valuation cap at the next priced round. Dilution shown at conversion ($0.15/share implied). $50K ÷ $0.15 = 333,333 new shares issued to investors.' },
+  ],
+  preSeedHolders: [
+    { name: 'Adewale Okonkwo (CEO)', role: 'Founder & Sole Shareholder', shares: 10000000, pct: 100.0, type: 'Common' },
+  ],
+  seedHolders: [
+    { name: 'Adewale Okonkwo (CEO)', role: 'Founder', shares: 10000000, pct: 96.8, type: 'Common' },
+    { name: 'Pre-Seed Investors (SAFE)', role: 'Angel / Early Backers', shares: 333333, pct: 3.2, type: 'Preferred' },
   ],
 };
 
@@ -79,11 +76,16 @@ export default function CapTable() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const [activeRound, setActiveRound] = useState('pre-seed');
 
-  const rounds = c.rounds.map(r => ({
-    ...r,
-    holders: ROUND_HOLDERS[r.id] || [],
-    total: ROUND_TOTALS[r.id] || 0,
-  }));
+  const holdersByRound = { 'pre-seed': c.preSeedHolders, 'seed': c.seedHolders };
+  const rounds = c.rounds.map(r => {
+    const holders = (holdersByRound[r.id] || []).map((h, i) => ({
+      ...h,
+      shares: Number(h.shares) || 0,
+      pct: Number(h.pct) || 0,
+      color: HOLDER_COLORS[i % HOLDER_COLORS.length],
+    }));
+    return { ...r, holders, total: holders.reduce((s, h) => s + h.shares, 0) };
+  });
 
   const round = rounds.find(r => r.id === activeRound) || rounds[0];
 
